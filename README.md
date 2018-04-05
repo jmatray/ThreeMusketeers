@@ -4,13 +4,13 @@
 * Christine - Design / Project Manager / Development
 
 ## Mission Statement
-"To eliminate the hassle of creating the perfect group"
+Showing people how they save and spend money so they can save and spend better
 
 ## Problem Statement
 
 Despite an improving economy, a shocking number of Americans are still unable to save up any of their
-money in order to increase their savings account. The result is Americans being unable to prepare
-for vital purchases in the future that will potentially enhance and improve their lives.
+money in order to increase their savings. The result is Americans being unable to prepare
+for vital purchases in the future that will potentially enhance and improve their lives, or being unable to cope when unexpected situations arise.
 
 This especially affects low-income households, as they often must live from paycheck to paycheck,
 which does not allow for the saving of money in order to make larger and more impactful purchases
