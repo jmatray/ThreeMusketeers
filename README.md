@@ -1,7 +1,7 @@
 # ThreeMusketeers
 * Jacob - Manager / Design / Development
 * Hannah - Marketing / Support / Development
-* Mariah - Design / Project Manager / Development
+* Christine - Design / Project Manager / Development
 
 ## Mission Statement
 "To eliminate the hassle of creating the perfect group"
@@ -19,6 +19,6 @@ up enough for their reach purchases, which has much to do with people being unaw
 they are actually spending on certain areas.
 
 Those who are unable to save money in an attempt to make important purchases in the future will in turn
-be stuck with what they currently have. Should a vital appliance of their's cease to function, they will
+be stuck with what they currently have. Should a vital appliance of theirs cease to function or an emergency occur, they will
 not only have an extremely difficult time remedying that problem, but also an extremely limited amount of options to
 do so.
