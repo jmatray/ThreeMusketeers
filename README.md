@@ -1,10 +1,22 @@
 # ThreeMusketeers
-* Jacob - Manager / Design
-* Hannah - Marketing / Support
-* Mariah - Design / Project Manager
+* Jacob - Manager / Design / Development
+* Hannah - Marketing / Support / Development
+* Mariah - Design / Project Manager / Development
 
 ## Mission Statement
 "To eliminate the hassle of creating the perfect group"
 
 ## Problem Statement
-"Problem Statement TBD"
+
+Despite an improving economy, a shocking number of Americans are still unable to save up any of their
+money in order to increase their savings account. The result is Americans being unable to prepare
+for vital purchases in the future that will potentially enhance and improve their lives.
+
+This especially affects low-income households, as they often must live from paycheck to paycheck,
+which does not allow for the saving of money in order to make larger and more impactful purchases
+in the future.
+
+Those who are unable to save money in an attempt to make important purchases in the future will in turn
+be stuck with what they currently have. Should a vital appliance of their's cease to function, they will
+have not only extremely difficult time remedyfying that problem, but also an extremely limited amount of options to
+do so.
