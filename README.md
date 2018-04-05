@@ -18,5 +18,5 @@ in the future.
 
 Those who are unable to save money in an attempt to make important purchases in the future will in turn
 be stuck with what they currently have. Should a vital appliance of their's cease to function, they will
-not only have an extremely difficult time remedyfying that problem, but also an extremely limited amount of options to
+not only have an extremely difficult time remedying that problem, but also an extremely limited amount of options to
 do so.
