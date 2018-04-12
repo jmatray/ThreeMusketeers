@@ -1,16 +1,11 @@
 # Design Specification
 
 ## The Problem
-Despite an improving economy, about 62% of Americans still have less than $1,000 in their savings accounts<sup>1</sup>. The result of this is Americans not having sufficient cash reserves for vital purchases to cover emergencies, or being unable to save up for expensive items that have the potential to significantly improve their lives.
+Despite an improving economy, about 62% of Americans still have less than $1,000 in their savings accounts.<sup>1</sup> The result of this is Americans not having sufficient cash reserves for vital purchases to cover emergencies, or being unable to save up for expensive items that have the potential to significantly improve their lives.
 
-This especially affects those who are in low-income households, which is a class that is increasing in numbers each year<sup>2</sup>, as they often must live from paycheck to paycheck, which does not allow for the saving of money in order to make larger and more impactful purchases in the future.  Even those who are not particularly low-income are having difficulties with saving up enough for their reach purchases, as they typically spend more than 89% of their earnings a year, leaving very little for their savings<sup>3</sup>.
+This especially affects those who are in low-income households, which is a class that is increasing in numbers each year, as they often must live from paycheck to paycheck, which does not allow for the saving of money in order to make larger and more impactful purchases in the future.<sup>2</sup>  Even those who are not particularly low-income are having difficulties with saving up enough for their reach purchases, as they typically spend more than 89% of their earnings a year, leaving very little for their savings.<sup>3</sup>
 
-Should someone with a low amount of savings suddenly have a vital appliance of theirs cease to function, have an emergency occur, or unexpectedly lose their job, many will either make last-minute reductions to their spending elsewhere, borrow from family or friends, or go into debt through credit cards. Unfortunate events occur all too often, especially when it is least expected, and having a sufficient amount of savings could help surmount those events<sup>4</sup>.
-
-1. Fottrell, Quentin. “Most Americans Have Less than $1,000 in Savings.” MarketWatch, 23 Dec. 2015, www.marketwatch.com/story/most-americans-have-less-than-1000-in-savings-2015-10-06.
-2. Mather, Mark. “U.S. Low-Income Working Families Increasing.” Population Reference Bureau, www.prb.org/us-working-poor-families/.
-3. Luhby, Tami. “It's Expensive to Be Poor.” CNNMoney, Cable News Network, money.cnn.com/2015/04/23/news/economy/poor-spending/index.html.
-4. “10 Reasons Why You Should Save Money (Even When Borrowing Is Cheap & Easy).” 10 Reasons Why You Should Save Money | My Money Coach, www.mymoneycoach.ca/saving-money/why-save-money.
+Should someone with a low amount of savings suddenly have a vital appliance of theirs cease to function, have an emergency occur, or unexpectedly lose their job, many will either make last-minute reductions to their spending elsewhere, borrow from family or friends, or go into debt through credit cards. Unfortunate events occur all too often, especially when it is least expected, and having a sufficient amount of savings could help surmount those events.<sup>4</sup>
 
 ## The Solution
 Our solution to this problem is Change. Our goal is to provide a simple way for users to view their monthly expenses breakdown, as well as make personal goals to help them achieve a desired financial state. The application will require users to sign up with a username and password as seen in Figure 1 to create a user account, which will be stored in a firebase database. The purpose of creating a user account is so user information, like monthly income and goal achievement status can be easily retrieved, reducing required user input.  Also seen in Figure 1 is the login functionality, which will require that users enter their email and password associated with their account if they have already created on. 
@@ -55,3 +50,9 @@ Once the user has created an account and gone through the initial information en
 
 When users are inputting their information into the application, the data will be pushed to firebase as the user clicks save at the bottom of the page. The data will be stored in a JSON tree structure in our Firebase Database, with the parentmost node of the tree being the unique ID for each user that is generated when they enter their email into the application at signup. This data will be broken into smaller trees based on the category it fits into, and will all be pulled when rendering the dashboard view.
 
+## References
+
+1. Fottrell, Quentin. “Most Americans Have Less than $1,000 in Savings.” MarketWatch, 23 Dec. 2015, www.marketwatch.com/story/most-americans-have-less-than-1000-in-savings-2015-10-06.
+2. Mather, Mark. “U.S. Low-Income Working Families Increasing.” Population Reference Bureau, www.prb.org/us-working-poor-families/.
+3. Luhby, Tami. “It's Expensive to Be Poor.” CNNMoney, Cable News Network, money.cnn.com/2015/04/23/news/economy/poor-spending/index.html.
+4. “10 Reasons Why You Should Save Money (Even When Borrowing Is Cheap & Easy).” 10 Reasons Why You Should Save Money | My Money Coach, www.mymoneycoach.ca/saving-money/why-save-money.
