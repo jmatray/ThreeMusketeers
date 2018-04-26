@@ -2,7 +2,7 @@
 
 ## DashboardComponent
 
-    A component that renders various graphs and displays using data that the user has input into the app. This data refers to their spending habits, financial goals, and general user information. Renders a radial display showing the breakdown of how much the user spends in each category, a segment showing the progress the user has made towards achieving their goals via progress bars, and bar charts comparing the user&#39;s current spending habits to the suggested amounts they should be spending. This component will pull this user data from the DataHelper component, which will format the data from Firebase into arrays of objects based on where in the dashboard they belong, rather than one large nested object.
+A component that renders various graphs and displays using data that the user has input into the app. This data refers to their spending habits, financial goals, and general user information. Renders a radial display showing the breakdown of how much the user spends in each category, a segment showing the progress the user has made towards achieving their goals via progress bars, and bar charts comparing the user&#39;s current spending habits to the suggested amounts they should be spending. This component will pull this user data from the DataHelper component, which will format the data from Firebase into arrays of objects based on where in the dashboard they belong, rather than one large nested object.
 
 ### Properties
 
@@ -61,7 +61,7 @@
 
 ### Description
 
-    This component will handle all the data manipulation for the site. It will receive the data pulled that was pulled from firebase for the specific user from the GetUserData component. It will then manipulate that user data to be sent to other components in state that is usable for their desired purposes. DataHandler will also handle any form of computing, like determining a user&#39;s suggested budget.
+This component will handle all the data manipulation for the site. It will receive the data pulled that was pulled from firebase for the specific user from the GetUserData component. It will then manipulate that user data to be sent to other components in state that is usable for their desired purposes. DataHandler will also handle any form of computing, like determining a user&#39;s suggested budget.
 
 ### Properties
 
@@ -113,7 +113,7 @@
 
 ### Description
 
-    This component will handle the signing up of a new user account, as well as the logging in and out of current users. It will look at the user inputted username and password, and either create a new account in firebase if signing up, or use firebase to authenticate if returning.
+This component will handle the signing up of a new user account, as well as the logging in and out of current users. It will look at the user inputted username and password, and either create a new account in firebase if signing up, or use firebase to authenticate if returning.
 
 ### Properties
 
@@ -153,7 +153,7 @@
 
 ### Description
 
-    This component collects the user&#39s preferences regarding notifications and sends them to the GetUserData component. Here, the user will enter information about how often they would like to receive notifications, both inside and outside the application, as well as how they would like to receive their external notifications. This information will be entered in via drop down and check box selections, and the data will be pushed to the GetUserData component upon clicking the &quot;save&quot; button.
+This component collects the user&#39s preferences regarding notifications and sends them to the GetUserData component. Here, the user will enter information about how often they would like to receive notifications, both inside and outside the application, as well as how they would like to receive their external notifications. This information will be entered in via drop down and check box selections, and the data will be pushed to the GetUserData component upon clicking the &quot;save&quot; button.
 
 ### Properties
 
@@ -195,7 +195,7 @@
 
 ### Description
 
-    This component will be responsible for rendering the &quot;Basic User Info&quot; page along with capturing its user input and sending it to the GetUserData component.  Here, the user will enter information regarding their dependent status, how many dependents are in their household, the size of their household, their employment status, as well as their estimated monthly income and monthly savings. This information will be entered via text input forms, and data will be pushed to the GetUserData component all at once upon clicking the &quot;save&quot; button.
+This component will be responsible for rendering the &quot;Basic User Info&quot; page along with capturing its user input and sending it to the GetUserData component.  Here, the user will enter information regarding their dependent status, how many dependents are in their household, the size of their household, their employment status, as well as their estimated monthly income and monthly savings. This information will be entered via text input forms, and data will be pushed to the GetUserData component all at once upon clicking the &quot;save&quot; button.
 
 ### Properties
 
@@ -340,7 +340,7 @@ This component will be responsible for rendering the &quot;Goals&quot; page alon
 
 Description
 
-        This component will be responsible for rendering the &quot;Expenses&quot; page along with capturing user input related to user spending and sending it to the GetUserData component.  Here, the user will enter information regarding how much they spend on necessary and discretionary items. This information will be entered via text input forms, and data will be pushed to the GetUserData component all at once upon clicking the &quot;save&quot; button. The user will also be able to add additional categories of discretionary spending.
+This component will be responsible for rendering the &quot;Expenses&quot; page along with capturing user input related to user spending and sending it to the GetUserData component.  Here, the user will enter information regarding how much they spend on necessary and discretionary items. This information will be entered via text input forms, and data will be pushed to the GetUserData component all at once upon clicking the &quot;save&quot; button. The user will also be able to add additional categories of discretionary spending.
 
 ### Properties
 
