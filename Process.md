@@ -126,7 +126,7 @@
 - If a member&#39;s schedule changes making them unable to attend meetings or make their weekly updates, we will discuss as a group new times to update each member
 - During the scheduled meeting on May 14th we will discuss if and what changes to the Requirement Specification need to be made before the freeze date on May 19th
   - We will decide what to drop by discussing &quot;problem&quot; requirements that are either taking up far too much time or are more complicated than anticipated, and discussing whether or not they are vital to the project. We will then decide by vote, with majority winning.
-- If there are any fights or disputes amongst team members that get to the point of needing a third party, we will meet with Soobin during his office hours to try and come to a solution
+- If there are any fights or disputes amongst team members that get to the point of needing a third party, we will meet with Zubin during his office hours to try and come to a solution
   - If that still does not solve the dispute, the Manager will discuss with Professor Begel to determine if the termination of a team member is required
   - If it is the Manager who is causing the issues, the other team members will be the ones to meet with Professor Begel
 - If firebase shuts down at some point during the process rendering us unable to continue the project, the team will look at similar alternatives like [http://backendless.com/](http://backendless.com/)to determine the best replacement
