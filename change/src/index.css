@@ -3,3 +3,6 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.help-block { display: none; }
+.form-group.has-error .help-block { display: block; }

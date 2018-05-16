@@ -7,6 +7,7 @@ export const submitBasicInfo = (userId, dataObject, category) =>
     db.ref(userId +'/'+category).set({
         income: dataObject.income,
         savings: dataObject.savings,
+        student: dataObject.student,
         dependent: dataObject.dependent,
         numberOfDependents: dataObject.dependentNum,
         numberInHouse: dataObject.numInHouse,
