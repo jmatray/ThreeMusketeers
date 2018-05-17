@@ -9,7 +9,7 @@ var config = {
     storageBucket: "budget-app-db2d0.appspot.com",
     messagingSenderId: "960807417072"
 };
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
 
 if (!firebase.apps.length) {
     firebase.initializeApp(config);

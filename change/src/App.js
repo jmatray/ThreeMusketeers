@@ -4,7 +4,7 @@ import './App.css';
 import BasicInfo from './components/BasicInfo';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Dashboard from './Dashboard.js';
-import BasicInfo from './BasicInfo.js';
+// import BasicInfo from './components/BasicInfo.js';
 import Expenses from './Expenses.js';
 import Goals from './Goals';
 

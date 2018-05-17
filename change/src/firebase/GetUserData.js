@@ -10,7 +10,7 @@ export const submitBasicInfo = (userId, dataObject, category) =>
         student: dataObject.student,
         dependent: dataObject.dependent,
         numberOfDependents: dataObject.dependentNum,
-        numberInHouse: dataObject.numInHouse,
+        numberInHouse: dataObject.householdNum,
         employmentStatus: dataObject.empStatus,  
 
     });
