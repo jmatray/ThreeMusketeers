@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import firebase from 'firebase';
-
+import RouterComponent from './RouterComponent';
 
 class AuthHandler extends Component {
     constructor(props) {
@@ -44,6 +44,14 @@ class AuthHandler extends Component {
             });
     }
 
+    onChange(event) {
+        let val = event.target.value;
+        let field = event.target.name;
+        let change = {};
+        change[field] = val;
+        this.setState(change);
+    }
+
     //handles when user signs in, changes user information in state
     onSignIn() {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
@@ -60,6 +68,9 @@ class AuthHandler extends Component {
     render() {
         return (
         <div id="page">
+            {this.state.user &&
+                <RouterComponent/>
+            }
             {!this.state.user &&
                 <div id="background">
                     <div id="container">
@@ -112,3 +123,5 @@ class AuthHandler extends Component {
         )
     }
 }
+
+export default AuthHandler;

@@ -7,8 +7,7 @@ export const submitBasicInfo = (userId, dataObject, category) =>
         dependent: dataObject.dependent,
         numberOfDependents: dataObject.dependentNum,
         numberInHouse: dataObject.numInHouse,
-        employmentStatus: dataObject.empStatus,  
-
+        employmentStatus: dataObject.empStat
     });
 
 export const submitExpenseInfo = (userId, dataObject, category) =>
