@@ -1,6 +1,6 @@
 # Verification Process
-
-```Requirements changes (will be updated on requirements specification by May 19 at 5 PM):
+```
+Requirements changes (will be updated on requirements specification by May 19 at 5 PM):
    * We will no longer be having custom goals
 ```
 
