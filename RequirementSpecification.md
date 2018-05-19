@@ -5,7 +5,7 @@
 * The site should be viewable by screen sizes >1024px 
 * Text input forms will not accept empty strings as valid inputs
 * Except when a new user is setting their information for the first time, a hamburger menu will be in the top right corner of the screen
-   * The menu should contain these options: “Dashboard”, “Expenses”, “Goals”, and “Settings”
+   * The navigation bar should contain these options: “Dashboard”, “Expenses”, “Goals”, "Profile," and “Settings”
    * Each option should send the user to their respective page after being clicked
 * Font for all titles is tentatively Century Gothic
 * Font for all regular text is tentatively PT Serif 
@@ -57,32 +57,31 @@ Once the user account has successfully been created, the user will then be redir
     * For number of dependents and number of household members, users should be able to select an integer from a dropdown that ranges from 0-12 and shows when the user clicks anywhere on the box
       * There should be a “+” next to the last number in the dropdown(12)
     * For student, dependent, working plus or minus 40 hours a week categories, users should be able to select yes or no from a dropdown menu that appears once users click on the input box
-  * User should be able to mark all expenses that are relevant to them by clicking on categories in a panel on the right hand side of the page - once users click on the category, they will appear outlined in bold
-    * Categories that users can select from will be: housing, utilities, food/groceries, transportation, school/tuition, insurance, house supplies, other
   * “Save” and “cancel” buttons will be displayed in the bottom right hand corner of the web page 
     * “Save” button should have the most emphasis (i.e. darker color, larger shadow)
     * “Cancel” button should have less emphasis than the “save” button (i.e. no fill on the button)
-    * Once the user hits “Save,” the information on this page should be saved locally and be sent to be stored in firebase’s database and the user will be sent to the “User Setting Expenses” page
+    * Once the user hits “Save,” the information on this page should be saved locally and be sent to the GetUserData component
     * Once the user hits “cancel,” all the input will be erased and the app will go back to whatever their previous screen was
     * Users must enter their estimated monthly income and savings, as well as select at least one category of expenses 
       * To indicate this, there will be asterisks near the “estimated monthly income” and “estimated monthly savings” text; there will be a sentence of text explaining that users must select at least one category in the box for expenses, as well as an asterisk
       * If users do not, a pop up will appear in a box in the middle of the page, stating what the user has not completed and prompting them to do so
       * To exit out of the pop up box, the user can hit the “okay” button in the bottom right hand corner of the pop up box
       * Once the user exits out of the pop up box, the box that needs to be filled out will be emphasized (i.e. the box will be filled in in red)
+      * The information collected on this page once saved will be accessible and editable through the link to "Profile" on the navigation bar in order to allow users to change these values if necessary
+
 ## User Setting Expenses
 * Upon entering the page, users must be able to view the entire contents of the page, without needing to scroll 
   * “Set Your Expenses” will be shown in the top center of the page
   * The text below “Set Your Expenses” will be “Please enter the estimated amount you spend per month on the below expenses” and will be center aligned
-* The estimated monthly income and savings the user entered on the previous screen should be displayed below the page title and instructions on the left hand side of the screen in a non-editable manner, and should be retrieved from the firebase database
-* Under the estimated monthly income and savings on the left hand side of the page, the categories of expenses the user selected on the previous page should be displayed. Next to the text reflecting the category, a box for users to input numerical values should appear
+* The estimated monthly income and savings the user entered on the previous screen should be displayed below the page title and instructions on the left hand side of the screen in a non-editable manner, and should be retrieved from the GetUserData component
   * Users must click anywhere on the boxes to edit them
   * Users must input numerical values representing US dollars and cents
-* If the user did not select the “other” category on the “Basics” screen, the space spanning the right hand side of the page under the “Please enter the estimated amount you spend per month on the below expenses” should be blank
-* If the user selected the “other” category on the “Basics” screen, under the page title and instructions, a darker panel should appear spanning the right hand side of the page.
-  * Within and at the top of the panel, the user should see the text “You selected “Other.” Name other categories of expenses that apply to you and fill in the estimated amount you spend on that category per month.”
+* a darker panel should appear spanning the right hand side of the page.
+  * the user should see the text “You selected “Please name categories of expenses that apply to you and fill in the estimated amount you spend on that category per month. Please check the box on the right of the row if this category of expenses is a necessity”
   * “Category Name” will appear on the left half of the panel inside of a text input box; a box for user input will appear on the right half of the panel.
   * Users may click anyone on “Category Name” text box to edit the text . Once they click on the pre-filled text box, the clicked text “Category Name” will change to a blank input box in which they can type a new name. To save the name, they simply click outside of the input box, hit tab, or hit enter. 
   * For the input boxes on the right half of the panel, users must click on the box to begin entering information. Users may only enter in numerical values representing US dollars and cents,
+  * Check boxes will appear on the right of the boxes for Category Name and numerical values. They will appear as blank originally but once the user clicks on it to mark it as a necessity, a check mark will appear in the box. 
   * Originally, four rows of prefilled text boxes saying “Category Name” and blank input boxes will appear. If the user would like to add more categories of discretionary expenses, they must press the “add additional categories” button. Once they hit that button, an additional row will appear with an “X” icon to the left of the “category name” text. 
   * To remove the additional categories that have been added, one presses the “X” and the row disappears along with the data potentially entered into it.
   * As the user adds additional categories, the color of the panel will extend past the newly added categories.
@@ -91,7 +90,7 @@ Once the user account has successfully been created, the user will then be redir
   * The “Save” button should have a darker color than the “Go Back” button to have more emphasis
   * The “Go Back button should have a lighter color than the “Save” button to have more emphasis
   * If the “Go Back” button is clicked, the user will be sent back to their last page, with all input boxes that have their specific information saved in firebase should be pre-filled with their saved values, but still be editable and act like pre-defined text boxes
-  * If the “Save” button is clicked, all entered data should be sent to be stored in the firebase database and the user should be sent to the “User Setting Goals” page
+  * If the “Save” button is clicked, all entered data should be sent to the GetUserData compoment and the user should be sent to the “User Setting Goals” page
 
 ## User Setting Goals
 * Upon entering the page, users must be able to view the entire contents of the page, without needing to scroll 
@@ -112,7 +111,7 @@ Once the user account has successfully been created, the user will then be redir
   * If users attempt to save 50% or more of their income on non-essential/discretionary items, an alert will pop up stating that discretionary spending is typically 30% of one’s budget
   * The goals page allows users to allocate percentages of their income to certain categories of the budget - if the total percentage of all the categories does not equal 100% (if it is lower than or greater than 100%), an alert will pop up prompting the user to adjust their goals to match exactly 100%
 * If the “Go Back” button is clicked, the user will be sent to back to their last page, with all input boxes that have their specific information saved in firebase should be pre-filled with their saved values, but still be editable and act like pre-defined text boxes
-* If the “Save” button is clicked, all entered data should be sent to be stored in the firebase database and the user should be sent to the “Dashboard” page
+* If the “Save” button is clicked, all entered data should be sent to the GetUserData component and the user should be sent to the “Dashboard” page
 
 
 ## Notification Settings
@@ -124,7 +123,7 @@ Once the user account has successfully been created, the user will then be redir
    * This selector will have three options, one for receiving notification weekly, another for every two weeks, and one for notifications for once a month
    * Users will then select the option that they would like and that information will be saved as a state in the user’s account
    * This data will be passed to Firebase’s notification services
-   * Users can return to this page via a link on the hamburger menu 
+   * Users can return to this page via a link on the navigation bar 
      * Updates made to the notification time or method will again be saved as a state within the user object, replacing what was currently there
    ### Method
    * Several checkboxes will be displayed beneath the dropdown menu (the one determining frequency of notifications) with an accompanying label to the left it
@@ -135,14 +134,14 @@ Once the user account has successfully been created, the user will then be redir
      * If the text box is checked, an input box below the method checkboxes will appear with a label to its left asking for the user to input their phone number
 
 ## Dashboard
-* The dashboard will feature the same hamburger menu that is available on all other components
+* The dashboard will feature the same navigation bar that is available on all other components
 * In the upper-left corner will be a section containing the users’ current financial goals. 
   * The goals box will display each goal in a vertical list, with the least recently created goal appearing first. 
   * The goals will be labeled as “Goal 1”, “Goal 2”, etc. 
   * Each goal will be displayed as the label for the goal, the actual content of the goal underneath it (what is the goal and what do we do for it), and a progress bar to the right of the text.
     * The progress bar will indicate how close the user is to achieving their goal. As the user reports that they are getting closer to their goal, for example, by reporting how much they have saved towards a specific amount, this information will be saved as a percentage of goal completion. When this information is pulled from the database, the percentage can be used to specify how much of the bar to fill.
   * When a goal is completed, i.e. when the percentage reaches 100, the goal will remain on the screen with a text flag stating that the goal is complete until the user enters in a new goal to replace it.
-  * In the top right corner of the container will be a link titled “Edit Goals”. Clicking this link will redirect the user to the Goal Setting page, where the user can update, remove, or create new goals. These updates will again be pushed to firebase while the user is on that page, and when the user returns to the dashboard, these changes will be shown upon re-rendering of the dashboard. The edit goals link facilitates the same redirecting/navigation as opening the hamburger menu and clicking the goals tab.
+  * In the top right corner of the container will be a link titled “Edit Goals”. Clicking this link will redirect the user to the Goal Setting page, where the user can update, remove, or create new goals. These updates will again be pushed to firebase while the user is on that page, and when the user returns to the dashboard, these changes will be shown upon re-rendering of the dashboard. The edit goals link facilitates the same redirecting/navigation as opening the navigation bar and clicking the goals tab.
 
 * In the bottom-left corner, a panel/section titled “Spending” contains information about how much a user is currently spending on categories of expenses per month, what the application suggests the user should be spending, what they have spent so far this month, and whether the user is over and/or under budget
   * The categories of expenses the user has previously inputted will appear under “Spending” on the very left of the section under the subheading “Category..” For example, if the user inputted the category names “housing,” “Starbucks,” and “vacation” on the screen to add expenses, those names will appear under “Category.”
@@ -167,8 +166,8 @@ Once the user account has successfully been created, the user will then be redir
 
 ## Notification/Reminder (In App)
 * Users will receive reminders if they have not updated their spending information within the time period that they specified on the “Notification Settings” page. This time frame will be enforced via a timestamp saved in firebase when the user updates their spending information. This timestamp will be compared against the current date. 
-  * The notification will appear in the app. A badge will appear on the hamburger menu, indicating that the user has a pending notification. 
-  * When the user selects the notification icon (a bell in the hamburger menu) the notification modal will open on the user’s screen (in the middle)
+  * The notification will appear in the app. A badge will appear on the navigation bar, indicating that the user has a pending notification. 
+  * When the user selects the notification icon (a bell in the navigation bar) the notification modal will open on the user’s screen (in the middle)
   * This modal will remind the user to update their spending information in order to make the application more accurate. 
     * Text: “Don’t forget to update how much you have spent this month! Doing so helps us help you reach your goals.”
   * The modal will have two options for closing it at the bottom. 
