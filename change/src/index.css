@@ -6,3 +6,12 @@ body {
 
 .help-block { display: none; }
 .form-group.has-error .help-block { display: block; }
+
+.goals-container {
+  background-color: lightslategrey;
+}
+
+.progress-label {
+  float: left;
+  margin-right: 1em;
+}

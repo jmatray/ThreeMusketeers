@@ -1,6 +1,7 @@
 import { submitBasicInfo } from '../firebase/GetUserData';
 import { Row, Col, FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
 import React, { Component } from 'react';
+import firebase from 'firebase';
 
 class BasicInfo extends Component {
     constructor(props, context) {
@@ -133,8 +134,8 @@ class BasicInfo extends Component {
         infoObj.savings = this.state.savingsValue;
         infoObj.dependentNum = this.state.numDependents;
         infoObj.householdNum = this.state.numInHouse;
-        //TODO: once auth is complete, look up current user ID in order to submit to firebase
-        //submitBasicInfo('userId goes here', infoObj, 'basicInfo');
+        var userId = firebase.auth().currentUser.uid;
+        submitBasicInfo(userId, infoObj, 'basicInfo');
     }
 
 
