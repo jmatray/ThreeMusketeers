@@ -7,8 +7,10 @@ class AuthHandler extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
+            signUpEmail: '',
+            signUpPassword: '',
+            logInEmail: '',
+            logInPassword: '',
             username: ''
         }
     }
@@ -19,10 +21,13 @@ class AuthHandler extends Component {
             if (User) {
                 this.setState({
                     user: User,
-                    email: '',
-                    password: '',
-                    username: '',
-                    error: ''
+                    signUpEmail: '',
+                    signUpPassword: '',
+                    signUpError: '',
+                    logInEmail: '',
+                    logInPassword: '',
+                    logInError: '',
+                    username: ''
                 })
             } else {
                 this.setState({
@@ -34,13 +39,13 @@ class AuthHandler extends Component {
 
     //handles when user has signed up, sends user info to firebase
     onSignUp() {
-        firebase.auth().createUserWithEmailAndPassword(this.state.email,
-            this.state.password).then(User => {
+        firebase.auth().createUserWithEmailAndPassword(this.state.signUpEmail,
+            this.state.signUpPassword).then(User => {
                 return User.updateProfile({
                     displayName: this.state.username
                 })
             }).catch(err => {
-                this.setState({ error: err.message })
+                this.setState({ signUpError: err.message })
             });
     }
 
@@ -54,9 +59,9 @@ class AuthHandler extends Component {
 
     //handles when user signs in, changes user information in state
     onSignIn() {
-        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        firebase.auth().signInWithEmailAndPassword(this.state.logInEmail, this.state.logInPassword)
             .catch(err => {
-                this.setState({ error: err.message })
+                this.setState({ logInError: err.message });
             });
     }
 
@@ -76,23 +81,23 @@ class AuthHandler extends Component {
                                 <i id="icon" className="fa fa-cutlery"></i>
                                 <h1 className="auth">Sign Up</h1>
                                 <div id="authentication">
-                                    {this.state.error &&
-                                        <p className="alert alert-danger">{this.state.error}</p>
+                                    {this.state.signUpError &&
+                                        <p className="alert alert-danger">{this.state.signUpError}</p>
                                     }
                                     <div className="form-group">
                                         <input className="form-control"
-                                            name="email"
+                                            name="signUpEmail"
                                             placeholder="E-mail address"
-                                            value={this.state.email}
+                                            value={this.state.signUpEmail}
                                             onChange={(event) => { this.onChange(event) }}
                                         />
                                     </div>
 
                                     <div className="form-group">
                                         <input type="password" className="form-control"
-                                            name="password"
+                                            name="signUpPassword"
                                             placeholder="Password"
-                                            value={this.state.password}
+                                            value={this.state.signUpPassword}
                                             onChange={(event) => { this.onChange(event) }}
                                         />
                                     </div>
@@ -119,23 +124,23 @@ class AuthHandler extends Component {
                                 <i id="icon" className="fa fa-cutlery"></i>
                                 <h1 className="auth">Log In</h1>
                                 <div id="authentication">
-                                    {this.state.error &&
-                                        <p className="alert alert-danger">{this.state.error}</p>
+                                    {this.state.logInError &&
+                                        <p className="alert alert-danger">{this.state.logInError}</p>
                                     }
                                     <div className="form-group">
                                         <input className="form-control"
-                                            name="email"
+                                            name="logInEmail"
                                             placeholder="E-mail address"
-                                            value={this.state.email}
+                                            value={this.state.logInEmail}
                                             onChange={(event) => { this.onChange(event) }}
                                         />
                                     </div>
 
                                     <div className="form-group">
                                         <input type="password" className="form-control"
-                                            name="password"
+                                            name="logInPassword"
                                             placeholder="Password"
-                                            value={this.state.password}
+                                            value={this.state.logInPassword}
                                             onChange={(event) => { this.onChange(event) }}
                                         />
                                     </div>

@@ -4,7 +4,7 @@
 
 /******************************/
 .sign-in {
-  margin-top: 49px
+  margin-top: 44px
 }
 
 .sign-in-header {
@@ -16,7 +16,7 @@
   text-align: center;
   border: 1px solid rgb(146, 145, 145);
   max-width: 500px;
-  height: 260px;
+  height: auto;
   width: 55%;
   margin: 50px auto auto auto;
   box-shadow: 2px 2px 8px rgba(49, 49, 49, 0.5);
