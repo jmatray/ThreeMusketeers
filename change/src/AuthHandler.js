@@ -60,66 +60,95 @@ class AuthHandler extends Component {
             });
     }
 
-    //handles when user signs out, signs them out of firebase
-    onSignOut() {
-        firebase.auth().signOut();
-    }
-
     render() {
         return (
-        <div id="page">
-            {this.state.user &&
-                <RouterComponent/>
-            }
-            {!this.state.user &&
-                <div id="background">
-                    <div id="container">
-                        <i id="icon" className="fa fa-cutlery"></i>
-                        <h1 className="auth">Log in to Change</h1>
-                        <div id="authentication">
-                            {this.state.error &&
-                                <p className="alert alert-danger">{this.state.error}</p>
-                            }
-                            <div className="form-group">
-                                <input className="form-control"
-                                    name="email"
-                                    placeholder="E-mail address"
-                                    value={this.state.email}
-                                    onChange={(event) => { this.onChange(event) }}
-                                />
+            <div id="page">
+                {this.state.user &&
+                    <RouterComponent />
+                }
+                {!this.state.user &&
+                    <div>
+                        <h1 className="sign-in-header"> Welcome to Change </h1>
+
+                        {/* Creates the sign-up form for new users */}
+                        <div id="auth-container">
+                            <div className="auth-form-container">
+                                <i id="icon" className="fa fa-cutlery"></i>
+                                <h1 className="auth">Sign Up</h1>
+                                <div id="authentication">
+                                    {this.state.error &&
+                                        <p className="alert alert-danger">{this.state.error}</p>
+                                    }
+                                    <div className="form-group">
+                                        <input className="form-control"
+                                            name="email"
+                                            placeholder="E-mail address"
+                                            value={this.state.email}
+                                            onChange={(event) => { this.onChange(event) }}
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <input type="password" className="form-control"
+                                            name="password"
+                                            placeholder="Password"
+                                            value={this.state.password}
+                                            onChange={(event) => { this.onChange(event) }}
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <input className="form-control"
+                                            name="username"
+                                            placeholder={"Username"}
+                                            value={this.state.username}
+                                            onChange={(event) => { this.onChange(event) }}
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <button className="btn btn-primary mr-2" onClick={() => this.onSignUp()}>
+                                            Sign Up
+                                    </button>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div className="form-group">
-                                <input type="password" className="form-control"
-                                    name="password"
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={(event) => { this.onChange(event) }}
-                                />
-                            </div>
+                            {/* Creates the log in form for returning users */}
+                            <div className="auth-form-container">
+                                <i id="icon" className="fa fa-cutlery"></i>
+                                <h1 className="auth">Log In</h1>
+                                <div id="authentication">
+                                    {this.state.error &&
+                                        <p className="alert alert-danger">{this.state.error}</p>
+                                    }
+                                    <div className="form-group">
+                                        <input className="form-control"
+                                            name="email"
+                                            placeholder="E-mail address"
+                                            value={this.state.email}
+                                            onChange={(event) => { this.onChange(event) }}
+                                        />
+                                    </div>
 
-                            <div className="form-group">
-                                <input className="form-control"
-                                    name="username"
-                                    placeholder={"Username"}
-                                    value={this.state.username}
-                                    onChange={(event) => { this.onChange(event) }}
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <button className="btn btn-primary mr-2" onClick={() => this.onSignUp()}>
-                                    Sign Up
-                        </button>
-                                <button className="btn btn-success mr-2" onClick={() => this.onSignIn()}>
-                                    Sign In
-                        </button>
+                                    <div className="form-group">
+                                        <input type="password" className="form-control"
+                                            name="password"
+                                            placeholder="Password"
+                                            value={this.state.password}
+                                            onChange={(event) => { this.onChange(event) }}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <button className="btn btn-success mr-2 sign-in" onClick={() => this.onSignIn()}>
+                                            Log In
+                                    </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
-        </div>
+                    </div>}
+            </div>
         )
     }
 }
