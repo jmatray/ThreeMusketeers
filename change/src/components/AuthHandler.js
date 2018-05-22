@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 import firebase from 'firebase';
 import RouterComponent from './RouterComponent';
+import { getUserId } from './DataHandler';
 
 class AuthHandler extends Component {
     constructor(props) {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 import firebase from 'firebase';
 
-class Goals extends Component {
+class Dashboard extends Component {
     render() {
         return (
-            <p> Goals </p>
+            <p> Dashboard </p>
         )
     }
 }
-export default Goals;
+export default Dashboard;
