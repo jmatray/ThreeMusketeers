@@ -18,6 +18,8 @@ export const submitBasicInfo = (userId, dataObject, category) =>
 //Function that handles information submit from the ExpenseInfo component.
 //Takes in the userID of the current user, the category of ExpenseInfo, 
 //and the data that the user input into the various forms as an object.
+
+//TODO: change set discretionary goals to a dynamic number of them
 export const submitExpenseInfo = (userId, dataObject, category) =>
     db.ref(userId +'/'+category).set({
         housing: dataObject.housing,
@@ -38,9 +40,6 @@ export const submitGoalInfo = (userId, dataObject, category) =>
         savingsGoal: dataObject.savings,
         necessarySpendingGoal: dataObject.necSpend,
         discretionarySpendingGoal: dataObject.desc,
-        customGoal1: dataObject.cust1,
-        customGoal2: dataObject.cust2,
-        customGoal3: dataObject.cust3,
     });
 
 //Takes in the userID of the current user and fetches their data tree from firebase.
@@ -48,4 +47,14 @@ export const submitGoalInfo = (userId, dataObject, category) =>
 export const getData = (userId) =>
     db.ref(userId).on('value', (snapshot) => {
         return snapshot.val();
+    })
+
+export const getSavingIncome = (userId) =>
+    db.ref(userId).child('basicInfo').on('value', (snapshot) => {
+        var moneyValues = {};
+        moneyValues = {
+            savings: snapshot.val().savings,
+            income: snapshot.val().income
+        }
+        return moneyValues;
     })

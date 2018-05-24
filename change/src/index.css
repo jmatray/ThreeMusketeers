@@ -8,10 +8,31 @@ body {
 .form-group.has-error .help-block { display: block; }
 
 .goals-container {
-  background-color: lightslategrey;
+  background-color: rgba(200, 211, 223, 0.945);
+  padding: 20px;
+  margin: 15px;
 }
 
 .progress-label {
   float: left;
   margin-right: 1em;
+}
+
+.goal-bar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.table-container {
+  background-color: rgba(200, 211, 223, 0.945);
+  padding: 20px;
+  margin: 15px;
+}
+
+.recharts-default-legend {
+  margin-top: 15px;
+}
+
+.recharts-legend-wrapper {
+  margin-top: 15px;
 }
