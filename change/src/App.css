@@ -1,28 +1,36 @@
-.App {
+/******************************/
+
+/*For Autehntication Forms*/
+
+/******************************/
+.sign-in {
+  margin-top: 44px
+}
+
+.sign-in-header {
   text-align: center;
+  margin-top: 50px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.auth-form-container {
+  text-align: center;
+  border: 1px solid rgb(146, 145, 145);
+  max-width: 500px;
+  height: auto;
+  width: 55%;
+  margin: 50px auto auto auto;
+  box-shadow: 2px 2px 8px rgba(49, 49, 49, 0.5);
+  border-radius: 3px;
+  background-color: aliceblue;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.form-group{
+  margin: 10px;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#auth-container {
+  display: flex;
+  text-align: center;
+  margin-left: 250px;
+  margin-right: 250px;
 }
