@@ -78,7 +78,7 @@ class Goals extends Component {
                 </p>  
                 <Row>
                     <Col>
-                        <form className="radio-inline">  
+                        <form>  
                                 <FormGroup
                                 controlId="formBasicText"
                                 validationState={this.getValidationStateForSavingsGoal()}
@@ -95,7 +95,7 @@ class Goals extends Component {
                                 <HelpBlock>Please enter a percentage </HelpBlock>
                             </FormGroup>
                         </form>  
-                        <form className="radio-inline">  
+                        <form>  
                                 <FormGroup
                                 controlId="formBasicText"
                                 validationState={this.getValidationStateForNeccesityGoal()}
@@ -112,7 +112,7 @@ class Goals extends Component {
                                 <HelpBlock>Please enter a percentage </HelpBlock>
                             </FormGroup>
                         </form> 
-                        <form className="radio-inline">  
+                        <form>  
                                 <FormGroup
                                 controlId="formBasicText"
                                 validationState={this.getValidationStateForDiscretionaryGoal()}
