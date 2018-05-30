@@ -6,6 +6,7 @@ import BasicInfo from './BasicInfo.js';
 import Expenses from './Expenses.js';
 import Goals from './Goals';
 import firebase from 'firebase';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 
 class RouterComponent extends Component {
@@ -19,20 +20,22 @@ class RouterComponent extends Component {
     render() {
         return (
             <div>
-                <nav id="nav" className="navbar">
+                <Navbar id="nav" className="navbar" bsStyle="inverse">
+                <Navbar.Brand id="SiteName">¢hange</Navbar.Brand>
                     <Router>
-                        <div className="container">
-                            <span id="SiteName">Change</span>
-                            <Link className="link" to="/">Dashboard</Link>
-                            <Link className="link" to="/BasicInfo">Basic Info</Link>
-                            <Link className="link" to="/Expenses">Expenses</Link>
-                            <Link className="link" to="/Goals">Goals</Link>
+                        <Nav pullRight>
+                        {/* <div className="container"> */}
+                            <NavItem><Link className="link" to="/">Dashboard</Link></NavItem>
+                            <NavItem><Link className="link" to="/BasicInfo">Basic Info</Link></NavItem>
+                            <NavItem><Link className="link" to="/Expenses">Expenses</Link></NavItem>
+                            <NavItem><Link className="link" to="/Goals">Goals</Link></NavItem>
                             <button id="signout" className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
                                 Sign Out
                           </button>
-                        </div>
+                        {/* </div> */}
+                        </Nav>
                     </Router>
-                </nav>
+                </Navbar>
                 <Router>
                     <div>
                         <Route exact path='/' render={() => <Dashboard />} />
