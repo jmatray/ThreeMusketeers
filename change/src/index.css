@@ -36,3 +36,16 @@ body {
 .recharts-legend-wrapper {
   margin-top: 15px;
 }
+.progress-container {
+  height: 100%;
+}
+.link {
+  font-size: 18px;
+  color: white;
+}
+#signout {
+  margin-top: 8px;
+}
+.navbar-inverse .navbar-brand {
+  color: orange;
+}

@@ -68,10 +68,16 @@ class Dashboard extends Component {
                 
             })
         }
+        if (this.state.comparisons !== undefined) {
+            var progress = this.state.comparisons.map((row) => {
+                var percent = ((row.current)/(row.suggested) * 100);
+                return <div className="progress-container"><h4 className="progress-title">{row.name}</h4><ProgressBar now={percent} label={`$${row.current}`}/></div>
+            });
+        }
 
         return (
             <div className="dashboard-container">
-                <Row>
+                
                     {/* container for the goal progress section */}
                     <Col xs={5}>
                         <div className="goals-container">
@@ -105,8 +111,11 @@ class Dashboard extends Component {
 
                         </div>
                     </Col>
-                </Row>
-                <Row>
+                    <Col xs={3}>
+                        <div className="progress-container">{progress}</div>
+                    </Col>
+                
+                
                     <Col xs={5}>
                         <div className="table-container">
                             <h2>Spending</h2>
@@ -128,7 +137,7 @@ class Dashboard extends Component {
                     </Col>
                     <Col xs={4}>
                         <div className="comparison-container">
-                            <BarChart width={600} height={300} data={this.state.comparisons}
+                            <BarChart width={500} height={300} data={this.state.comparisons}
                                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
@@ -140,7 +149,7 @@ class Dashboard extends Component {
                             </BarChart>
                         </div>
                     </Col>
-                </Row>
+                
                 <div className="progress-container">
                 </div>
 
