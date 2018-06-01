@@ -28,7 +28,7 @@ class Dashboard extends Component {
                 { name: 'Savings', value: 100.00,},
                 { name: 'Housing', value: 1350.00},
                 { name: 'Food', value: 219.00},
-                { name: 'Clothes', value: 83.00},
+                { name: 'Clothes', value: 92.00},
                 { name: 'Transportation', value: 90.00}
             ],
 
@@ -45,11 +45,23 @@ class Dashboard extends Component {
 
         //populate an overall array that contains expense categories and the different amounts in them
         for (let i = 0; i < this.state.current.length; i++) {
+            var progressStatus = '';
+            var calc = (this.state.thisMonth[i].value / this.state.suggested[i].value);
+            if (.90 <= calc && calc <= .99) {
+                progressStatus = 'warning';
+            }
+            if ( calc > .99 ) {
+                progressStatus = 'danger';
+            }
+            if (calc < .9) {
+                progressStatus = 'success';
+            }
             comparison[i] = {
                 name: this.state.current[i].name,
                 current: this.state.current[i].value,
                 suggested: this.state.suggested[i].value,
-                thisMonth: this.state.thisMonth[i].value
+                thisMonth: this.state.thisMonth[i].value,
+                progressStyle: progressStatus
             }
         }
         this.setState({comparisons: comparison});
@@ -70,8 +82,9 @@ class Dashboard extends Component {
         }
         if (this.state.comparisons !== undefined) {
             var progress = this.state.comparisons.map((row) => {
-                var percent = ((row.current)/(row.suggested) * 100);
-                return <div className="progress-container"><h4 className="progress-title">{row.name}</h4><ProgressBar now={percent} label={`$${row.current}`}/></div>
+                var percent = ((row.thisMonth)/(row.suggested) * 100);
+                percent = Math.round(percent);
+                return <div className="progress-item"><h4 className="progress-title">{row.name}</h4><ProgressBar bsStyle={row.progressStyle} now={percent} label={`${percent}%`}/></div>
             });
         }
 
@@ -79,7 +92,7 @@ class Dashboard extends Component {
             <div className="dashboard-container">
                 
                     {/* container for the goal progress section */}
-                    <Col xs={5}>
+                    
                         <div className="goals-container">
                             <h2>Goals</h2>
                             {/* progress bar for goal #1 */}
@@ -89,7 +102,7 @@ class Dashboard extends Component {
                             </div>
                             {/* progress bar for goal #2 */}
                             <div className="goal-bar">
-                                <h4 class="progress-label">Goal #2</h4>
+                                <h4 className="progress-label">Goal #2</h4>
                                 <ProgressBar now={75} />
                             </div>
                             {/* progress bar for goal #3 */}
@@ -98,28 +111,21 @@ class Dashboard extends Component {
                                 <ProgressBar now={20} />
                             </div>
                         </div>
-                    </Col>
+                    
 
                     {/* container for the pie chart */}
-                    <Col xs={4}>
-                        <div className="radial-container">
-                            <h2>Expense Breakdown</h2>
+                            <div className="radial-container">
+                            <h2>Overall Breakdown</h2>
                             <PieChart width={300} height={300}>
                                 <Pie isAnimationActive={true} data={this.state.current} cx={150} cy={150} outerRadius={80} fill="#8884d8" label />
                                 <Tooltip />
                             </PieChart>
 
                         </div>
-                    </Col>
-                    <Col xs={3}>
-                        <div className="progress-container">{progress}</div>
-                    </Col>
-                
-                
-                    <Col xs={5}>
+                   
                         <div className="table-container">
                             <h2>Spending</h2>
-                            <Table>
+                            <Table hover>
                                 <thead>
                                     <tr>
                                         <th>Category Name</th>
@@ -134,24 +140,27 @@ class Dashboard extends Component {
 
                             </Table>
                         </div>
-                    </Col>
-                    <Col xs={4}>
+                    
+                    
                         <div className="comparison-container">
-                            <BarChart width={500} height={300} data={this.state.comparisons}
+                            <BarChart width={400} height={300} data={this.state.comparisons}
                                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
                                 <YAxis />
                                 <Tooltip />
-                                <Legend />
-                                <Bar dataKey="current" fill="#8884d8" />
+                                <Legend height={8} align='center'/>
+                                <Bar dataKey="current" fill="#ff9900" />
                                 <Bar dataKey="suggested" fill="#82ca9d" />
                             </BarChart>
                         </div>
-                    </Col>
-                
-                <div className="progress-container">
-                </div>
+                    
+                    
+                        <div className='progress-container'>
+                        <h2>Progress</h2>
+                            {progress}
+                        </div>
+                    
 
             </div>
         )

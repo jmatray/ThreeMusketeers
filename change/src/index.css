@@ -8,9 +8,11 @@ body {
 .form-group.has-error .help-block { display: block; }
 
 .goals-container {
-  background-color: rgba(200, 211, 223, 0.945);
+  background-color: rgb(218, 217, 216);
   padding: 20px;
-  margin: 15px;
+  margin-left: 15px;
+  width: 350px;
+  border-radius: 10px;
 }
 
 .progress-label {
@@ -24,9 +26,11 @@ body {
 }
 
 .table-container {
-  background-color: rgba(200, 211, 223, 0.945);
+  background-color: rgb(218, 217, 216);
   padding: 20px;
   margin: 15px;
+  width: 350px;
+  border-radius: 10px;
 }
 
 .recharts-default-legend {
@@ -38,6 +42,11 @@ body {
 }
 .progress-container {
   height: 100%;
+  width: 200px;
+  top: 60px;
+  position: absolute;
+  left: 800px;
+  padding: 20px;
 }
 .link {
   font-size: 18px;
@@ -48,4 +57,22 @@ body {
 }
 .navbar-inverse .navbar-brand {
   color: orange;
+}
+
+.radial-container {
+  width: 350px;
+  top: 60px;
+  position: absolute; 
+  left: 370px;
+  padding: 20px;
+  text-align: center;
+}
+.radial-container > h2 {
+  margin-bottom: 0px;
+}
+.comparison-container {
+  position: absolute;
+  left: 360px;
+  top: 430px;
+  
 }
