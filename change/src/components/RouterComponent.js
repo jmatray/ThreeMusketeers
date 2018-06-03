@@ -16,7 +16,7 @@ class RouterComponent extends Component {
 
     //handles when user signs out, signs them out of firebase
     onSignOut() {
-        formatExpenses(data);
+        firebase.auth().signOut();
     }
 
     render() {

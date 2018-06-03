@@ -30,6 +30,7 @@ class BasicInfo extends Component {
                 householdNum: '',
                 empStatus: ''
             },
+            success: ''
         };
     }
 
@@ -39,7 +40,7 @@ class BasicInfo extends Component {
         if (this.state.incomeValue.length === 0) {
             return null;
         }
-        var regex = /^\d+(?:\.\d{0,2})$/;
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
             return 'success';
         } else {
@@ -53,7 +54,7 @@ class BasicInfo extends Component {
         if (this.state.savingsValue.length === 0) {
             return null;
         }
-        var regex = /^\d+(?:\.\d{0,2})$/;
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
             return 'success';
         } else {
@@ -135,20 +136,37 @@ class BasicInfo extends Component {
         infoObj.dependentNum = this.state.numDependents;
         infoObj.householdNum = this.state.numInHouse;
         var userId = firebase.auth().currentUser.uid;
-        submitBasicInfo(userId, infoObj, 'basicInfo');
+        submitBasicInfo(userId, infoObj, 'basicInfo').then(() => {
+            this.toggleSuccess();
+        }).catch((error) => {
+            this.setState({ error: error.message });
+        })
     }
 
-
+    toggleSuccess() {
+        if (this.state.error) {
+            this.setState({ error: !this.state.error })
+        }
+        this.setState({
+            success: !this.state.success
+        })
+    }
 
 
     render() {
         return (
             <div className='page-container'>
                 <h1 className='page-header'>Basic Information</h1>
+                {this.state.success &&
+                    <p className="alert alert-success">{'Successfully Updated Your Expenses'}</p>
+                }
+                {this.state.error &&
+                    <p className="alert alert-danger">{this.state.error}</p>
+                }
                 <p>Please fill out the information below to help us get an accurate picture of
                     who you are and what your expenses are. You can always edit this information
                     later.
-            </p>
+                </p>
                 <Row>
                     <Col xs={6}>
                         <form>

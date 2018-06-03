@@ -3,6 +3,7 @@ import '../App.css';
 import firebase from 'firebase';
 import { Row, Col, FormGroup, ControlLabel, FormControl, HelpBlock, Button, Checkbox } from 'react-bootstrap';
 import Popup from 'react-popup';
+import {submitGoalInfo} from '../firebase/GetUserData';
 
 class Goals extends Component {
     constructor(props, context) {
@@ -12,6 +13,7 @@ class Goals extends Component {
         this.handleNecessityGoalChange = this.handleNecessityGoalChange.bind(this);
         this.handleDiscretionaryGoalChange = this.handleDiscretionaryGoalChange.bind(this);
         this.handleError = this.handleError.bind(this);
+        this.formatForSubmit = this.formatForSubmit.bind(this);
 
         this.state = {
             savingsGoal: '',
@@ -71,7 +73,8 @@ class Goals extends Component {
         this.setState({ discretionaryGoal: e.target.value });
     }
 
-    handleError(e) {
+    handleError() {
+        var submitable = true;
         var total = Number(this.state.savingsGoal) + Number(this.state.discretionaryGoal) + Number(this.state.necessityGoal);
         if (this.state.savingsGoal >= 40) {
             window.alert("Suggested percentage of savings is 15-20%. You are attempting to save at least double that, that may be too ambitious")
@@ -79,7 +82,35 @@ class Goals extends Component {
             window.alert("Discretionary spending is typically 30% of one’s budget")
         } else if (total != 100) {
             window.alert("Adjust your goals to add up to exactly 100%. your total now is " + total)
+            submitable = false;
         }
+        return submitable;
+    }
+
+    formatForSubmit(event) {
+        event.preventDefault();
+        let submitable = this.handleError();
+        let goalObj = {};
+        goalObj.savings = this.state.savingsGoal;
+        goalObj.necSpend = this.state.necessityGoal;
+        goalObj.desc = this.state.discretionaryGoal;
+        var userId = firebase.auth().currentUser.uid;
+        if (submitable) {
+            submitGoalInfo(userId, goalObj, 'goals').then(() => {
+                this.toggleSuccess();
+            }).catch((error) => {
+                this.setState({ error: error.message });
+            });
+        }
+    }
+
+    toggleSuccess() {
+        if (this.state.error) {
+            this.setState({ error: !this.state.error })
+        }
+        this.setState({
+            success: !this.state.success
+        });
     }
 
     render() {
@@ -88,7 +119,13 @@ class Goals extends Component {
                 <h1 className='page-header'>Set Your Goals</h1>
                 <p>
                     Please fill out the information below to help us get an accurate picture of what your goals are. You can always edit this information later
-                </p>  
+                </p> 
+                {this.state.success &&
+                    <p className="alert alert-success">{'Successfully Updated Your Expenses'}</p>
+                }
+                {this.state.error &&
+                    <p className="alert alert-danger">{this.state.error}</p>
+                } 
                 <Row>
                     <Col>
                         <form>  
@@ -98,7 +135,7 @@ class Goals extends Component {
                             >
                             <ControlLabel>Savings</ControlLabel>
                                 <FormControl
-                                    type="text" //does number work?
+                                    type="number" //does number work?
                                     value={this.state.savingsGoal}
                                     placeholder="Enter percentage of income here"
                                     onChange={this.handleSavingsGoalChange}
@@ -115,7 +152,7 @@ class Goals extends Component {
                             >
                             <ControlLabel>Spending: Necessities</ControlLabel>
                                 <FormControl
-                                    type="text" //does number work?
+                                    type="number" //does number work?
                                     value={this.state.necessityGoal}
                                     placeholder="Enter percentage of income here"
                                     onChange={this.handleNecessityGoalChange}
@@ -132,7 +169,7 @@ class Goals extends Component {
                             >
                             <ControlLabel>Spending: Discretionary</ControlLabel>
                                 <FormControl
-                                    type="text" //does number work?
+                                    type="number" //does number work?
                                     value={this.state.discretionaryGoal}
                                     placeholder="Enter percentage of income here"
                                     onChange={this.handleDiscretionaryGoalChange}
@@ -151,8 +188,7 @@ class Goals extends Component {
                             this.getValidationStateForSavingsGoal() !== "success" ||
                             this.getValidationStateForDiscretionaryGoal() !== "success" ||
                             this.getValidationStateForNeccesityGoal() !== "success"}
-                            onClick={this.formatForSubmit}
-                            onClick={this.handleError}>Save</Button>
+                            onClick={this.formatForSubmit}>Save</Button>
                     </Col>
                 </Row>
             </div>    

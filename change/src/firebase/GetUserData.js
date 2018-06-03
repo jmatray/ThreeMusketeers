@@ -26,10 +26,7 @@ export const submitExpenseInfo = (userId, dataObject, category) =>
         utilities: dataObject.utilities,
         food: dataObject.food,
         transportation: dataObject.transportation,
-        discretionary1: dataObject.desc1,
-        discretionary2: dataObject.desc2,
-        discretionary3: dataObject.desc3,
-        discretionary4: dataObject.desc4,
+        misc: dataObject.misc
     });
 
 //Function that handles information submit from the GoalInfo component.
@@ -44,10 +41,8 @@ export const submitGoalInfo = (userId, dataObject, category) =>
 
 //Takes in the userID of the current user and fetches their data tree from firebase.
 //The data is returned as an object.
-export const getData = (userId) =>
-    db.ref(userId).on('value', (snapshot) => {
-        return snapshot.val();
-    })
+
+
 
 export const getSavingIncome = (userId) =>
     db.ref(userId).child('basicInfo').on('value', (snapshot) => {
