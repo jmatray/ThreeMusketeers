@@ -76,3 +76,11 @@ body {
   top: 430px;
   
 }
+.page-container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.completeStatus {
+  display: inline;
+}

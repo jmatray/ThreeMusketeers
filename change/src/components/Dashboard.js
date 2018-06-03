@@ -83,10 +83,10 @@ class Dashboard extends Component {
             <div className="dashboard-container">
                 {this.state.newUser && <div>
                     <h2 className="page-header"> Welcome to Change! </h2>
-                    <p> To view your dashboard, please complete the below forms:</p>
-                    <p> Basic Info: {this.state.toDo.basicInfo ? "Complete" : 'Incomplete'} </p>
-                    <p> Expenses: {this.state.toDo.expenseInfo ? "Complete" : 'Incomplete'} </p>
-                    <p> Goals: {this.state.toDo.goals ? "Complete" : 'Incomplete'} </p>
+                    <h3> To view your dashboard, please complete the below forms:</h3>
+                <p> Basic Info:  {this.state.toDo.basicInfo ? <p className="completeStatus" style={{color: 'green'}}>Complete </p> : <p className="completeStatus" style={{color: 'red'}}>Incomplete</p>}</p>
+                <p> Expenses:  {this.state.toDo.expenseInfo ? <p className="completeStatus" style={{color: 'green'}}>Complete </p> : <p className="completeStatus" style={{color: 'red'}}>Incomplete</p>}</p>
+                <p> Goals:  {this.state.toDo.goals ? <p className="completeStatus" style={{color: 'green'}}>Complete </p> : <p className="completeStatus" style={{color: 'red'}}>Incomplete</p>}</p>
 
                     
                 </div>}
@@ -97,8 +97,10 @@ class Dashboard extends Component {
                             <h2>Goals</h2>
                             {/* progress bar for goal #1 */}
                             <div className="goal-bar">
+
                                 <h4 className="progress-label">Savings</h4>
                                 <ProgressBar now={this.state.goals.savings} label={`${this.state.goals.savings}%`}/>
+
                             </div>
                             {/* progress bar for goal #2 */}
                             <div className="goal-bar">
@@ -112,6 +114,7 @@ class Dashboard extends Component {
                             </div>
                         </div>
                     
+
                     {/* container for the pie chart */}
                             <div className="radial-container">
                             <h2>Overall Breakdown</h2>
@@ -139,6 +142,7 @@ class Dashboard extends Component {
                             </Table>
                         </div>
                     
+                    
                         <div className="comparison-container">
                             <BarChart width={400} height={300} data={this.state.comparisons}
                                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -152,11 +156,15 @@ class Dashboard extends Component {
                             </BarChart>
                         </div>
                     
+                    
                         <div className='progress-container'>
                         <h2>Progress</h2>
                             {progress}
                         </div>
                 </div>}    
+
+                <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                    
 
             </div>
         )

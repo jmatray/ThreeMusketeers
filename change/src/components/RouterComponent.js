@@ -9,7 +9,6 @@ import NotificationHandler from './NotificationHandler';
 import Goals from './Goals';
 import firebase from 'firebase';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import IncorporationForm from './altExpense.js';
 import {data, formatExpenses} from './DataHandler';
 
 class RouterComponent extends Component {

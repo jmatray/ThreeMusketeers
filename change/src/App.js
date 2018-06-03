@@ -14,7 +14,9 @@ class App extends Component {
     return (
       <div id='page'> 
         <AuthHandler />
+        
       </div>
+      
     );
   }
 }
