@@ -40,11 +40,14 @@ class Expenses extends Component {
         let userId = getUserId();
         firebase.database().ref(userId).child('basicInfo').on('value', (snapshot) => {
             var moneyValues = {};
-            moneyValues = {
-                savings: snapshot.val().savings,
-                income: snapshot.val().income
+            var data = snapshot.val();
+            if (data) {
+                moneyValues = {
+                    savings: data.savings,
+                    income: data.income
+                }
+                this.setState({ income: moneyValues.income, savings: moneyValues.savings });
             }
-            this.setState({income: moneyValues.income, savings: moneyValues.savings});
         });
     }    
 
@@ -206,7 +209,6 @@ class Expenses extends Component {
     //This then passes the data to the GetUserData component.
     formatForSubmit(event) {
         event.preventDefault();
-        let submitable = this.handleError();
         let dataObject = {};
         dataObject.housing = this.state.housing;
         dataObject.transportation = this.state.transportation;

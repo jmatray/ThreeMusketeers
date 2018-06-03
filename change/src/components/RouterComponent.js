@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Dashboard from './Dashboard.js';
 import BasicInfo from './BasicInfo.js';
 import Expenses from './Expenses.js';
+import NotificationHandler from './NotificationHandler';
 
 import Goals from './Goals';
 import firebase from 'firebase';
@@ -31,6 +32,7 @@ class RouterComponent extends Component {
                             <NavItem><Link className="link" to="/BasicInfo">Basic Info</Link></NavItem>
                             <NavItem><Link className="link" to="/Expenses">Expenses</Link></NavItem>
                             <NavItem><Link className="link" to="/Goals">Goals</Link></NavItem>
+                            <NavItem><Link className="link" to="/NotificationHandler">Notification Settings</Link></NavItem>
                             <button id="signout" className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
                                 Sign Out
                           </button>
@@ -44,6 +46,7 @@ class RouterComponent extends Component {
                         <Route path='/BasicInfo' render={() => <BasicInfo />} />
                         <Route path='/Expenses' render={() => <Expenses />} />
                         <Route path='/Goals' render={() => <Goals />} />
+                        <Route path='/NotificationHandler' render={() => <NotificationHandler />} />
                     </div>
                 </Router>
             </div>

@@ -3,13 +3,14 @@ import '../App.css';
 import firebase from 'firebase';
 import { Row, Col, Table, ProgressBar } from 'react-bootstrap';
 import { BarChart, PieChart, Pie, Tooltip, CartesianGrid, XAxis, YAxis, Legend, Bar } from 'recharts';
-import {getUserId, formatExpenses, formatGoals, getSuggestion} from './DataHandler';
+import {getUserId, formatExpenses, formatGoals, getSuggestion, checkCompletion} from './DataHandler';
 
 class Dashboard extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            goals: {}
+            goals: {},
+
         }
     }
 
@@ -18,38 +19,48 @@ class Dashboard extends Component {
         let userId = getUserId();
         firebase.database().ref(userId).once('value', (snapshot) => {
             let data = snapshot.val();
-            this.setState({
-                 current: formatExpenses(data),
-                 goals: formatGoals(data),
-                 suggested: getSuggestion(data)
-                 });
-            getSuggestion(data);
+            if (!data || !data.basicInfo || !data.expenseInfo || !data.goals) {
+                this.setState({
+                    newUser: true,
+                    toDo: checkCompletion(data)
+                });
+            } else {
+                this.setState({
+                    newUser: false,
+                    current: formatExpenses(data),
+                    goals: formatGoals(data),
+                    suggested: getSuggestion(data)
+                });
+            }
         }).then(() => {
-            console.log(this.state.goals);
-            //populate an overall array that contains expense categories and the different amounts in them
-            for (let i = 0; i < this.state.current.length; i++) {
-                var progressStatus = '';
-                var calc = (this.state.current[i].value / this.state.suggested[i].value);
-                console.log(calc);
-                if (.90 <= calc && calc <= .99) {
-                    progressStatus = 'warning';
-                }
-                if (calc > .99) {
-                    progressStatus = 'danger';
-                }
-                if (calc < .9) {
-                    progressStatus = 'success';
-                }
-                comparison[i] = {
-                    name: this.state.suggested[i].name,
-                    current: this.state.current[i].value,
-                    suggested: this.state.suggested[i].value,
-                    progressStyle: progressStatus
+            if (!this.state.newUser) {
+                //populate an overall array that contains expense categories and the different amounts in them
+                if (!this.state.newUser) {
+                    console.log('here');
+                    for (let i = 0; i < this.state.current.length; i++) {
+                        var progressStatus = '';
+                        var calc = (this.state.current[i].value / this.state.suggested[i].value);
+                        console.log(calc);
+                        if (.90 <= calc && calc <= .99) {
+                            progressStatus = 'warning';
+                        }
+                        if (calc > .99) {
+                            progressStatus = 'danger';
+                        }
+                        if (calc < .9) {
+                            progressStatus = 'success';
+                        }
+                        comparison[i] = {
+                            name: this.state.suggested[i].name,
+                            current: this.state.current[i].value,
+                            suggested: this.state.suggested[i].value,
+                            progressStyle: progressStatus
+                        }
+                    }
+                    this.setState({ comparisons: comparison });
                 }
             }
-            this.setState({ comparisons: comparison });
         });
-
     }
 
     render() {
@@ -70,7 +81,16 @@ class Dashboard extends Component {
 
         return (
             <div className="dashboard-container">
-                
+                {this.state.newUser && <div>
+                    <h2 className="page-header"> Welcome to Change! </h2>
+                    <p> To view your dashboard, please complete the below forms:</p>
+                    <p> Basic Info: {this.state.toDo.basicInfo ? "Complete" : 'Incomplete'} </p>
+                    <p> Expenses: {this.state.toDo.expenseInfo ? "Complete" : 'Incomplete'} </p>
+                    <p> Goals: {this.state.toDo.goals ? "Complete" : 'Incomplete'} </p>
+
+                    
+                </div>}
+                {!this.state.newUser && <div>
                     {/* container for the goal progress section */}
                     
                         <div className="goals-container">
@@ -136,7 +156,7 @@ class Dashboard extends Component {
                         <h2>Progress</h2>
                             {progress}
                         </div>
-                    
+                </div>}    
 
             </div>
         )

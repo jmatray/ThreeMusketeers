@@ -149,7 +149,6 @@ class BasicInfo extends Component {
     //This then passes the data to the GetUserData component.
     formatForSubmit(event) {
         event.preventDefault();
-        let submitable = this.handleError();
         let infoObj = { ...this.state.userInfo };
         infoObj.income = this.state.incomeValue;
         infoObj.savings = this.state.savingsValue;
