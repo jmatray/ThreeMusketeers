@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import firebase from 'firebase';
 import { Row, Col, FormGroup, ControlLabel, FormControl, HelpBlock, Button, Checkbox } from 'react-bootstrap';
+import Popup from 'react-popup';
 
 class Goals extends Component {
     constructor(props, context) {
@@ -67,6 +68,17 @@ class Goals extends Component {
 
     handleDiscretionaryGoalChange(e) {
         this.setState({ discretionaryGoal: e.target.value });
+    }
+
+    onClick(e) {
+        var total = this.state.savingsGoal + this.state.discretionaryGoal + this.state.necessityGoal;
+        if (this.state.savingsGoal >= 40) {
+            window.alert("Suggested percentage of savings is 15-20%. You are attempting to save at least double that, that may be too ambitious")
+        } else if (this.state.discretionaryGoal >= 50) {
+            window.alert("Discretionary spending is typically 30% of one’s budget")
+        } else if (total != 100) {
+            window.alert("Adjust your goals to add up to exactly 100%")
+        }
     }
 
     render() {
@@ -142,8 +154,10 @@ class Goals extends Component {
                     </Col>
                 </Row>
             </div>    
+            
         )
     }
+
 }
 
 export default Goals;
