@@ -142,6 +142,7 @@ class Dashboard extends Component {
                     
                     
                         <div className="comparison-container">
+                            <h3>Actual vs. Suggested Spending</h3>
                             <BarChart width={400} height={300} data={this.state.comparisons}
                                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
