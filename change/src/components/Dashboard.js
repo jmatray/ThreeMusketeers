@@ -3,49 +3,34 @@ import '../App.css';
 import firebase from 'firebase';
 import { Row, Col, Table, ProgressBar } from 'react-bootstrap';
 import { BarChart, PieChart, Pie, Tooltip, CartesianGrid, XAxis, YAxis, Legend, Bar } from 'recharts';
-import {getUserId, formatExpenses} from './DataHandler';
+import {getUserId, formatExpenses, formatGoals, getSuggestion} from './DataHandler';
 
 class Dashboard extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            
-
-            suggested: [
-                { name: 'Savings', value: 300.00,},
-                { name: 'Housing', value: 1350.00},
-                { name: 'Food', value: 300.00},
-                { name: 'Clothes', value: 100.00},
-                { name: 'Transportation', value: 150.00}
-            ],
-
-            thisMonth: [
-                { name: 'Savings', value: 100.00,},
-                { name: 'Housing', value: 1350.00},
-                { name: 'Food', value: 219.00},
-                { name: 'Clothes', value: 92.00},
-                { name: 'Transportation', value: 90.00}
-            ],
-
-            goals: [
-                { name: 'goal1', goal: 'To save $100 this month', category: 'savings'},
-                { name: 'goal2', goal: 'To only spend $1700 on necesities', category: 'necesity'},
-                { name: 'goal3', goal: 'To only spend $300 on discretionary things', category: 'discretionary'}
-            ]
+            goals: {}
         }
     }
 
     componentDidMount() {
         var comparison = [];
         let userId = getUserId();
-        firebase.database().ref('11111').once('value', (snapshot) => {
+        firebase.database().ref(userId).once('value', (snapshot) => {
             let data = snapshot.val();
-            this.setState({ current: formatExpenses(data) });
+            this.setState({
+                 current: formatExpenses(data),
+                 goals: formatGoals(data),
+                 suggested: getSuggestion(data)
+                 });
+            getSuggestion(data);
         }).then(() => {
+            console.log(this.state.goals);
             //populate an overall array that contains expense categories and the different amounts in them
             for (let i = 0; i < this.state.current.length; i++) {
                 var progressStatus = '';
-                var calc = (this.state.thisMonth[i].value / this.state.suggested[i].value);
+                var calc = (this.state.current[i].value / this.state.suggested[i].value);
+                console.log(calc);
                 if (.90 <= calc && calc <= .99) {
                     progressStatus = 'warning';
                 }
@@ -56,10 +41,9 @@ class Dashboard extends Component {
                     progressStatus = 'success';
                 }
                 comparison[i] = {
-                    name: this.state.current[i].name,
+                    name: this.state.suggested[i].name,
                     current: this.state.current[i].value,
                     suggested: this.state.suggested[i].value,
-                    thisMonth: this.state.thisMonth[i].value,
                     progressStyle: progressStatus
                 }
             }
@@ -76,19 +60,13 @@ class Dashboard extends Component {
                 return <tr><td>{row.name}</td><td>{row.current}</td><td>{row.suggested}</td><td>{row.thisMonth}</td></tr>
             });
         }
-        if (this.state.goals !== undefined) {
-            var goals = this.state.goals.map((goal) => {
-                
-            })
-        }
         if (this.state.comparisons !== undefined) {
             var progress = this.state.comparisons.map((row) => {
-                var percent = ((row.thisMonth)/(row.suggested) * 100);
+                var percent = ((row.current)/(row.suggested) * 100);
                 percent = Math.round(percent);
                 return <div className="progress-item"><h4 className="progress-title">{row.name}</h4><ProgressBar bsStyle={row.progressStyle} now={percent} label={`${percent}%`}/></div>
             });
         }
-        console.log(progress)
 
         return (
             <div className="dashboard-container">
@@ -99,18 +77,18 @@ class Dashboard extends Component {
                             <h2>Goals</h2>
                             {/* progress bar for goal #1 */}
                             <div className="goal-bar">
-                                <h4 className="progress-label">Goal #1</h4>
-                                <ProgressBar now={40} label={`${40}%`}/>
+                                <h4 className="progress-label">Savings</h4>
+                                <ProgressBar now={this.state.goals.savings} label={`${this.state.goals.savings}%`}/>
                             </div>
                             {/* progress bar for goal #2 */}
                             <div className="goal-bar">
-                                <h4 className="progress-label">Goal #2</h4>
-                                <ProgressBar now={75} />
+                                <h4 className="progress-label">Necessities</h4>
+                                <ProgressBar now={this.state.goals.necessary} label={`${this.state.goals.necessary}%`} />
                             </div>
                             {/* progress bar for goal #3 */}
                             <div className="goal-bar">
-                                <h4 class="progress-label">Goal #3</h4>
-                                <ProgressBar now={20} />
+                                <h4 class="progress-label">Discretionaries</h4>
+                                <ProgressBar now={this.state.goals.discretionary} label={`${this.state.goals.discretionary}%`} />
                             </div>
                         </div>
                     
@@ -118,7 +96,7 @@ class Dashboard extends Component {
                             <div className="radial-container">
                             <h2>Overall Breakdown</h2>
                             <PieChart width={300} height={300}>
-                                <Pie isAnimationActive={true} data={this.state.current} cx={150} cy={150} outerRadius={80} fill="#8884d8" label />
+                                <Pie isAnimationActive={true} data={this.state.current} dataKey="value" nameKey="name" cx={150} cy={150} outerRadius={80} fill="#8884d8" label />
                                 <Tooltip />
                             </PieChart>
 
@@ -132,7 +110,6 @@ class Dashboard extends Component {
                                         <th>Category Name</th>
                                         <th>Current</th>
                                         <th>Suggested</th>
-                                        <th>This Month</th>
                                     </tr>
                                 </thead>
                                 <tbody>

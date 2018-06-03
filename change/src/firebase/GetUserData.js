@@ -21,11 +21,20 @@ export const submitBasicInfo = (userId, dataObject, category) =>
 
 //TODO: change set discretionary goals to a dynamic number of them
 export const submitExpenseInfo = (userId, dataObject, category) =>
+<<<<<<< HEAD
     dataObject.forEach(element => {
         db.ref(userId +'/'+category).child(element.name).set({
             value: [element.value],
             type: [element.type]
         });
+=======
+    db.ref(userId +'/'+category).set({
+        housing: dataObject.housing,
+        utilities: dataObject.utilities,
+        food: dataObject.food,
+        transportation: dataObject.transportation,
+        misc: dataObject.misc
+>>>>>>> 57b1be89c485fc948f72d14c19166441384be9e5
     });
     
 
@@ -41,17 +50,15 @@ export const submitGoalInfo = (userId, dataObject, category) =>
 
 //Takes in the userID of the current user and fetches their data tree from firebase.
 //The data is returned as an object.
-export const getData = (userId) =>
-    db.ref(userId).on('value', (snapshot) => {
-        return snapshot.val();
-    })
+
+
 
 export const getSavingIncome = (userId) =>
     db.ref(userId).child('basicInfo').on('value', (snapshot) => {
         var moneyValues = {};
         moneyValues = {
-            savings: snapshot.val().savings,
-            income: snapshot.val().income
+            savings: snapshot.val().basicInfo.savings,
+            income: snapshot.val().basicInfo.income
         }
         return moneyValues;
     })

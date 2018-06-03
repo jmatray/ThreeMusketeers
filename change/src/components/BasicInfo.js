@@ -15,6 +15,7 @@ class BasicInfo extends Component {
         this.handleEmploymentSelect = this.handleEmploymentSelect.bind(this);
         this.handleHouseChange = this.handleHouseChange.bind(this);
         this.formatForSubmit = this.formatForSubmit.bind(this);
+        this.handleClear = this.handleClear.bind(this);
 
         this.state = {
             incomeValue: '',
@@ -30,6 +31,7 @@ class BasicInfo extends Component {
                 householdNum: '',
                 empStatus: ''
             },
+            success: ''
         };
     }
 
@@ -39,7 +41,7 @@ class BasicInfo extends Component {
         if (this.state.incomeValue.length === 0) {
             return null;
         }
-        var regex = /^\d+(?:\.\d{0,2})$/;
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
             return 'success';
         } else {
@@ -53,7 +55,7 @@ class BasicInfo extends Component {
         if (this.state.savingsValue.length === 0) {
             return null;
         }
-        var regex = /^\d+(?:\.\d{0,2})$/;
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
             return 'success';
         } else {
@@ -125,30 +127,67 @@ class BasicInfo extends Component {
         this.setState({ numInHouse: e.target.value });
     }
 
+    handleClear() {
+        this.setState({
+            incomeValue: '',
+            savingsValue: '',
+            numDependents: '',
+            numInHouse: '',
+            userInfo: {
+                income: '',
+                savings: '',
+                student: '',
+                dependent: '',
+                dependentNum: '',
+                householdNum: '',
+                empStatus: ''
+            },
+        });
+    }
+
     //Fills out userData object and calls the submitBasicInfo() function.
     //This then passes the data to the GetUserData component.
     formatForSubmit(event) {
         event.preventDefault();
+        let submitable = this.handleError();
         let infoObj = { ...this.state.userInfo };
         infoObj.income = this.state.incomeValue;
         infoObj.savings = this.state.savingsValue;
         infoObj.dependentNum = this.state.numDependents;
         infoObj.householdNum = this.state.numInHouse;
         var userId = firebase.auth().currentUser.uid;
-        submitBasicInfo(userId, infoObj, 'basicInfo');
+        submitBasicInfo(userId, infoObj, 'basicInfo').then(() => {
+            this.toggleSuccess();
+            this.handleClear();
+        }).catch((error) => {
+            this.setState({ error: error.message });
+        })
     }
 
-
+    toggleSuccess() {
+        if (this.state.error) {
+            this.setState({ error: !this.state.error })
+        }
+        this.setState({
+            success: true
+        })
+    }
 
 
     render() {
         return (
             <div className='page-container'>
                 <h1 className='page-header'>Basic Information</h1>
+                {this.state.success &&
+                    <p className="alert alert-success">{'Successfully Updated Your Information'}</p>
+                }
+                {this.state.error &&
+                    <p className="alert alert-danger">{this.state.error}</p>
+                }
                 <p>Please fill out the information below to help us get an accurate picture of
                     who you are and what your expenses are. You can always edit this information
                     later.
-            </p>
+                </p>
                 <Row>
                     <Col xs={6}>
                         <form>
@@ -260,7 +299,7 @@ class BasicInfo extends Component {
 
                 <Row>
                     <Col xs={12} className="save-cancel-bar">
-                        <Button>Cancel</Button>
+                        <Button onClick={this.handleClear}>Cancel</Button>
                         <Button disabled={
                             this.getValidationStateForIncome() !== "success" ||
                             this.getValidationStateForSavings() !== "success" ||
