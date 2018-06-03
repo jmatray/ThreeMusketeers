@@ -225,14 +225,14 @@ class Expenses extends Component {
     render() {
         return (
             <div className='page-container'>
-                <h1 className='page-header'>Set Your Expenses </h1>
+                <h1 className='page-header' id='expenses-header'>Set Your Expenses </h1>
                 {this.state.success &&
                     <p className="alert alert-success">{'Successfully Updated Your Expenses'}</p>
                 }
                 {this.state.error &&
                     <p className="alert alert-danger">{this.state.error}</p>
                 }
-                <p>
+                <p id="expenses-header">
                     Please enter the estimated amount you spend per month on the below expenses
                 </p>
 

@@ -24,8 +24,13 @@
   background-color: aliceblue;
 }
 
-.form-group, .expense-input {
+.form-group, .expense-input, #expenses-header {
   margin: 10px;
+  margin-left: 20px;
+}
+
+.page-header {
+  margin-left: 10px;
 }
 
 .input {
