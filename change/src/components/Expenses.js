@@ -12,17 +12,15 @@ class Expenses extends Component {
         this.getValidationStateForExpenseName = this.getValidationStateForExpenseName.bind(this);
         this.getValidationStateForExpenseValue = this.getValidationStateForExpenseValue.bind(this);
         this.formatForSubmit = this.formatForSubmit.bind(this);
-<<<<<<< HEAD
-=======
         this.handleClear = this.handleClear.bind(this);
         this.onClick = this.onClick.bind(this);
->>>>>>> 57b1be89c485fc948f72d14c19166441384be9e5
 
 
         this.state = {
             userInfo: {
-
+                
             },
+
             income: '',
             savings: '',
             basicExpenses: ['input-0'],
@@ -30,20 +28,6 @@ class Expenses extends Component {
             /* get user's estimated monthly savings from GetUserData */
             success: false,
             name: '',
-<<<<<<< HEAD
-            expenses: [{ name: '', value: '' }],
-            maxIndex: 0
-        };
-    }
-
-
-
-    getValidationStateForExpenseName(idx) {
-        var input = this.state.expenses[idx].name; // msArr["objectId"] !== undefined
-        console.log(input);
-        if (this.state.expenses[idx].name === '') {
-            return 'error';
-=======
         housing: '',
         utilities: '',
         food: '',
@@ -74,7 +58,21 @@ class Expenses extends Component {
         var numNum = +input;
         if (isNaN(numNum)) {
             return 'success';
->>>>>>> 57b1be89c485fc948f72d14c19166441384be9e5
+        } else {
+            return 'success';
+        }
+    }
+
+    getValidationStateForCategoryOne() {
+        var input = this.state.categoryOne;
+        if (this.state.categoryOne ==='Category Name') {
+            return this.state.categoryOne;
+        }
+        var regex = /[^a-zA-Z]+/g; // this could be wrong 
+        var numNum = +input;
+        if (isNaN(numNum)) {
+            return 'success';
+
         } else {
             return 'success';
         }
@@ -94,30 +92,30 @@ class Expenses extends Component {
         }
     }
 
-
-    onSubmitClick(e) {
-        console.log("in here!");
-        e.preventDefault();
-        console.log(e.target);
-        this.setState({ basicExpenses: e.target })
+    handleCategoryOneValueChange(e) {
+        this.setState({ categoryOneValue: e.target.value });
     }
 
-    onClick(e) {
-        this.setState({ basicExpenses: e.target.id = "additional" });
+    handleCategoryOneChecked(evt) {
+        this.setState({ checkboxChecked: evt.target.checked });
+      }
+      
+    handleCategoryOneIsItChecked() {
+        console.log(this.state.checkboxChecked ? 'Yes' : 'No');
     }
 
-    updateForm(event) {
-        let val = event.target.value;
-        let field = event.target.name;
-        let change = {};
-        change[field] = val;
-        this.setState(change);
+    handleC1CheckboxChange(evt) {
+        this.setState({ categoryOneChecked: evt.target.checked}); 
+    }
+      
+    handleC1IsItChecked() {
+        console.log(this.state.categoryOneChecked ? 'Yes' : 'No');
     }
 
-    getValidationStateForHousing() {
-        var input = this.state.housing;
-        if (this.state.housing.length === 0) {
-            return null;
+    getValidationStateForCategoryTwo() {
+        var input = this.state.categoryTwo;
+        if (this.state.categoryTwo ==='Category Name') {
+            return this.state.categoryTwo;
         }
         var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
@@ -187,41 +185,36 @@ class Expenses extends Component {
     handleSubmit = (evt) => {
         const { name, expenses } = this.state;
         alert(`Incorporated: ${name} with ${expenses.length} Expenses`);
-<<<<<<< HEAD
     }
 
-    handleAddExpense = () => {
-        this.setState({
-            expenses: this.state.expenses.concat([{ name: '', value: '' }]),
-            maxIndex: this.state.expenses.length + 1
-=======
-      }
+    // handleAddExpense = () => {
+    //     this.setState({
+    //         expenses: this.state.expenses.concat([{ name: '', value: '' }]),
+    //         maxIndex: this.state.expenses.length + 1
+    //   }
     
-    handleAddExpense = () => {
-        this.setState({
-            expenses: this.state.expenses.concat([{ name: '', value: '' }])
->>>>>>> 57b1be89c485fc948f72d14c19166441384be9e5
-        });
-    }
+    // handleAddExpense = () => {
+    //     this.setState({
+    //         expenses: this.state.expenses.concat([{ name: '', value: '' }])
+    //     });
+    // }
 
-    handleRemoveExpense = (idx) => () => {
-        this.setState({
-            expenses: this.state.expenses.filter((s, sidx) => idx !== sidx)
-<<<<<<< HEAD
-        });
-    }
-    handleCheck = (idx) => (evt) => {
-        console.log('here')
-        console.log(evt.target.value)
-        const newExpenses = this.state.expenses.map((expense, sidx) => {
-            if (idx !== sidx) return expense;
-            return { ...expense, type: evt.target.value };
-        });
-        this.setState({ expenses: newExpenses });
-    }
-=======
-        });
-    }
+    // handleRemoveExpense = (idx) => () => {
+    //     this.setState({
+    //         expenses: this.state.expenses.filter((s, sidx) => idx !== sidx)
+    //     });
+    // }
+    // handleCheck = (idx) => (evt) => {
+    //     console.log('here')
+    //     console.log(evt.target.value)
+    //     const newExpenses = this.state.expenses.map((expense, sidx) => {
+    //         if (idx !== sidx) return expense;
+    //         return { ...expense, type: evt.target.value };
+    //     });
+    //     this.setState({ expenses: newExpenses });
+    // }
+    //     });
+    // }
 
     handleClear() {
         this.setState({
@@ -242,19 +235,16 @@ class Expenses extends Component {
         })
     }
 
->>>>>>> 57b1be89c485fc948f72d14c19166441384be9e5
 
     //Fills out userData object and calls the submitBasicInfo() function.
     //This then passes the data to the GetUserData component.
     formatForSubmit(event) {
         event.preventDefault();
-<<<<<<< HEAD
         // let dataObject = { ...this.state.userInfo };
         // dataObject.expenses = this.state.expenses;
         var userId = firebase.auth().currentUser.uid;
         console.log(this.state.expenses)
         submitExpenseInfo(userId, this.state.expenses, 'expenseInfo');
-=======
         let submitable = this.handleError();
         let dataObject = {};
         dataObject.housing = this.state.housing;
@@ -269,12 +259,40 @@ class Expenses extends Component {
         }).catch((error) => {
             this.setState({ error: error.message });
         });
->>>>>>> 57b1be89c485fc948f72d14c19166441384be9e5
+
+    }
+
+
+    handleCategoryThreeChecked(evt) {
+        this.setState({ checkboxChecked: evt.target.checked });
+      }
+      
+    handleCategoryThreeIsItChecked() {
+        console.log(this.state.checkboxChecked ? 'Yes' : 'No');
+    }
+
+    handleC3CheckboxChange(evt) {
+        this.setState({ categoryThreeChecked: evt.target.checked}); 
+    }
+      
+    handleC3IsItChecked() {
+        console.log(this.state.categoryThreeChecked ? 'Yes' : 'No');
+    }
+
+    onSubmitClick(e) {
+        console.log("in here!");
+        e.preventDefault();
+        console.log(e.target);
+        this.setState({basicExpenses: e.target})
+    }
+
+    onClick(e) {
+        this.setState({basicExpenses: e.target.id="additional"});
     }
 
     render() {
         return (
-            <div className='page-container'>
+            <div className='page-container'> 
                 <h1 className='page-header'>Set Your Expenses </h1>
                 {this.state.success &&
                     <p className="alert alert-success">{'Successfully Updated Your Expenses'}</p>
@@ -284,14 +302,14 @@ class Expenses extends Component {
                 }
                 <p>
                     Please enter the estimated amount you spend per month on the below expenses
-                </p>
-
-                <Row>
-                    <Col xs={4}>
+                </p>    
+            
+               
+                    <Col xs={6}>    
                         <p> Estimated monthly income </p>
-                        <span>{this.state.income}</span>
-                        <p> Estimated monthly savings </p>
-                        <span>{this.state.savings}</span>
+                        <span>{ this.state.income }</span>
+                        <p> Estimated monthly savings </p> 
+                        <span>{ this.state.savings }</span>
                     </Col>
                     <Col xs={6}>
                         <form onSubmit={this.handleSubmit}>
@@ -396,37 +414,138 @@ class Expenses extends Component {
                             ))}
                             <button type="button" onClick={this.handleAddExpense} className="small">Add Expense</button>
                             <Col xs={12} className="save-cancel-bar">
-<<<<<<< HEAD
                                 <Button>Cancel</Button>
 
                                 <Button
 
                                     onClick={this.formatForSubmit}>Save</Button>
                             </Col>
-=======
-                        <Button onClick={this.handleClear}>Cancel</Button>
-
-                        <Button disabled={
-                            this.getValidationStateForHousing() !== "success" ||
-                            this.getValidationStateForUtilities() !== "success" ||
-                            this.getValidationStateForFood() !== "success" ||
-                            this.getValidationStateForTransportation() !== "success"}
-                            onClick={this.formatForSubmit}>Save</Button>
-                    </Col>
->>>>>>> 57b1be89c485fc948f72d14c19166441384be9e5
                         </form>
+                        </Col>
+                    <Col xs={4}>
+                    {/*
+                    <div id="dynamicInput">
+                       {this.state.basicExpenses.map(input => <FormInput key={input} />)}
+                   </div>*/}
+                        <form className="radio-inline" onSubmit={this.onSubmitClick.bind(this)}>  
+                            {/* form that takes in user's expenses per category */}
+                            <p>
+                                Please name categories of expenses that apply to you and fill in the estimated amount you spend on that category per month. Please check the box on the right of the row if this category of expenses is a necessity.
+                            </p> 
+                            <FormGroup
+                                id="additional"
+                                controlId="formBasicText"
+                                validationState={this.getValidationStateForCategoryOne()}
+                            > 
+                                <ControlLabel name="c1">Category One</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.categoryOne}
+                                    placeholder="Category name"
+                                    onChange={this.handleCategoryOneChange}
+                                />
+                                <FormControl.Feedback />
+                                <HelpBlock>Please enter category name in letters </HelpBlock>
+                                
+                            </FormGroup>
+                            <FormGroup
+                                id="additional"
+                                controlId="formBasicText"
+                                validationState={this.getValidationStateForCategoryOneValue()}
+                            >
+                                <FormControl
+                                    type="text" //does number work?
+                                    value={this.state.categoryOneValue}
+                                    placeholder="Enter numerical value here"
+                                    onChange={this.handleCategoryOneValueChange}
+                                    step={0.1}
+                                />
+                                <FormControl.Feedback />
+                                <HelpBlock>Please enter the amount you spend on this category per month in numerical values </HelpBlock>
+                            </FormGroup>   
+                            <ControlLabel id="additional" className="radio-inline"> Is it necessary spending?</ControlLabel>
+                            <Checkbox id="additional" className="radio-inline"  
+                                checked={this.state.categoryOneChecked}
+                                onChange={this.handleC1CheckboxChange}
+                            />
+                            {/* form that takes in user's expenses per category */}
+                            <FormGroup
+                                controlId="formBasicText"
+                                validationState={this.getValidationStateForCategoryTwoValue()}
+                            > 
+                            <ControlLabel>Category Two</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.categoryTwo}
+                                    placeholder="Category name"
+                                    onChange={this.handleCategoryTwoChange}
+                                />
+                                <FormControl.Feedback />
+                                <HelpBlock>Please enter category name in letters </HelpBlock>
+                                
+                            </FormGroup>
+                            <FormGroup
+                                controlId="formBasicText"
+                                validationState={this.getValidationStateForCategoryTwoValue()}
+                            >
+                                <FormControl
+                                    type="text" //does number work?
+                                    value={this.state.categoryTwoValue}
+                                    placeholder="Enter numerical value here"
+                                    onChange={this.handleCategoryTwoValueChange}
+                                    step={0.1}
+                                />
+                                <FormControl.Feedback />
+                                <HelpBlock>Please enter the amount you spend on this category per month in numerical values </HelpBlock>
+                            </FormGroup>   
+                            <ControlLabel className="radio-inline"> Is it necessary spending?</ControlLabel>
+                            <Checkbox className="radio-inline"  
+                                checked={this.state.categoryTwoChecked}
+                                onChange={this.handleC2CheckboxChange}
+                            />  
+                            {/* form that takes in user's expenses per category */}
+                            <FormGroup
+                                controlId="formBasicText"
+                                validationState={this.getValidationStateForCategoryThreeValue()}
+                            > 
+                            <ControlLabel>Category Three</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.categoryThree}
+                                    placeholder="Category name"
+                                    onChange={this.handleCategoryThreeChange}
+                                />
+                                <FormControl.Feedback />
+                                <HelpBlock>Please enter category name in letters </HelpBlock>
+                                
+                            </FormGroup>
+                            <FormGroup
+                                controlId="formBasicText"
+                                validationState={this.getValidationStateForCategoryThreeValue()}
+                            >
+                                <FormControl
+                                    type="text" //does number work?
+                                    value={this.state.categoryThreeValue}
+                                    placeholder="Enter numerical value here"
+                                    onChange={this.handleCategoryThreeValueChange}
+                                    step={0.1}
+                                />
+                                <FormControl.Feedback />
+                                <HelpBlock>Please enter the amount you spend on this category per month in numerical values </HelpBlock>
+                            </FormGroup>   
+                            <ControlLabel className="radio-inline"> Is it necessary spending?</ControlLabel>
+                            <Checkbox className="radio-inline"  
+                                checked={this.state.categoryThreeChecked}
+                                onChange={this.handleC3CheckboxChange}
+                            />
+                            <Button type = "submit"> Save </Button>
+                        </form> 
+                        <Button onClick={ () => this.appendInput() } onClick={this.onClick}>Add Additional Categories   
+                        </Button>
                     </Col>
-                </Row>
-                <Row>
-
-                </Row>
             </div>
         );
     }
 
-    appendInput() {
-        var newInput = `input-${this.state.inputs.length}`;
-        this.setState({ basicExpenses: this.state.basicExpenses.concat([newInput]) });
-    }
 }
 export default Expenses;

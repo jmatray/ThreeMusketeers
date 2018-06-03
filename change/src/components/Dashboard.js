@@ -77,8 +77,10 @@ class Dashboard extends Component {
                             <h2>Goals</h2>
                             {/* progress bar for goal #1 */}
                             <div className="goal-bar">
+
                                 <h4 className="progress-label">Savings</h4>
                                 <ProgressBar now={this.state.goals.savings} label={`${this.state.goals.savings}%`}/>
+
                             </div>
                             {/* progress bar for goal #2 */}
                             <div className="goal-bar">
@@ -92,6 +94,7 @@ class Dashboard extends Component {
                             </div>
                         </div>
                     
+
                     {/* container for the pie chart */}
                             <div className="radial-container">
                             <h2>Overall Breakdown</h2>
@@ -119,6 +122,7 @@ class Dashboard extends Component {
                             </Table>
                         </div>
                     
+                    
                         <div className="comparison-container">
                             <BarChart width={400} height={300} data={this.state.comparisons}
                                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -131,6 +135,7 @@ class Dashboard extends Component {
                                 <Bar dataKey="suggested" fill="#82ca9d" />
                             </BarChart>
                         </div>
+                    
                     
                         <div className='progress-container'>
                         <h2>Progress</h2>

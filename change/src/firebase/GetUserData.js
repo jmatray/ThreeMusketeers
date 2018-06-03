@@ -21,20 +21,13 @@ export const submitBasicInfo = (userId, dataObject, category) =>
 
 //TODO: change set discretionary goals to a dynamic number of them
 export const submitExpenseInfo = (userId, dataObject, category) =>
-<<<<<<< HEAD
+
     dataObject.forEach(element => {
         db.ref(userId +'/'+category).child(element.name).set({
             value: [element.value],
             type: [element.type]
         });
-=======
-    db.ref(userId +'/'+category).set({
-        housing: dataObject.housing,
-        utilities: dataObject.utilities,
-        food: dataObject.food,
-        transportation: dataObject.transportation,
-        misc: dataObject.misc
->>>>>>> 57b1be89c485fc948f72d14c19166441384be9e5
+
     });
     
 

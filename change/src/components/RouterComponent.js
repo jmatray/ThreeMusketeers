@@ -4,12 +4,12 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Dashboard from './Dashboard.js';
 import BasicInfo from './BasicInfo.js';
 import Expenses from './Expenses.js';
-
 import Goals from './Goals';
 import firebase from 'firebase';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import IncorporationForm from './altExpense.js';
+
 import {data, formatExpenses} from './DataHandler';
+
 
 class RouterComponent extends Component {
     //renders nav bar along with react router for navigation
