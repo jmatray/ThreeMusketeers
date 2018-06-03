@@ -106,10 +106,10 @@ export function getSuggestion(data) {
 export function checkCompletion(data) {
     let retObj = {};
     if(data) {
-        if(data.baiscInfo) {
+        if(data.basicInfo) {
             retObj.basicInfo = true;
         } else {
-            retObj.baiscInfo = false;
+            retObj.basicInfo = false;
         }
         if(data.expenseInfo) {
             retObj.expenseInfo = true;

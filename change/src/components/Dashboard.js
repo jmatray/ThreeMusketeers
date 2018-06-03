@@ -36,11 +36,9 @@ class Dashboard extends Component {
             if (!this.state.newUser) {
                 //populate an overall array that contains expense categories and the different amounts in them
                 if (!this.state.newUser) {
-                    console.log('here');
                     for (let i = 0; i < this.state.current.length; i++) {
                         var progressStatus = '';
                         var calc = (this.state.current[i].value / this.state.suggested[i].value);
-                        console.log(calc);
                         if (.90 <= calc && calc <= .99) {
                             progressStatus = 'warning';
                         }
@@ -64,7 +62,7 @@ class Dashboard extends Component {
     }
 
     render() {
-    
+        console.log(this.state.toDo);
         //generate rows for the table dynamically
         if (this.state.comparisons !== undefined) {
             var rows = this.state.comparisons.map((row) => {
