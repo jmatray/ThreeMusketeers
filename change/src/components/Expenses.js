@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Row, Col, FormGroup, ControlLabel, FormControl, HelpBlock, Button, Checkbox } from 'react-bootstrap';
 import firebase from 'firebase';
 import { getSavingIncome } from '../firebase/GetUserData';
+import { submitExpenseInfo } from '../firebase/GetUserData';
 
 class Expenses extends Component {
     constructor(props, context) {
@@ -112,6 +113,16 @@ class Expenses extends Component {
           expenses: this.state.expenses.filter((s, sidx) => idx !== sidx)
         });
       }
+
+      //Fills out userData object and calls the submitBasicInfo() function.
+    //This then passes the data to the GetUserData component.
+    formatForSubmit(event) {
+        event.preventDefault();
+        let dataObject = { ...this.state.userInfo };
+        dataObject.discretionary1 = this.state.expenses[0];
+        var userId = firebase.auth().currentUser.uid;
+        submitExpenseInfo(userId, dataObject, 'expenseInfo');
+    }
 
     render() {
         return (
