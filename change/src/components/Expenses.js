@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import './App.css';
 import { Row, Col, FormGroup, ControlLabel, FormControl, HelpBlock, Button, Checkbox } from 'react-bootstrap';
 import firebase from 'firebase';
-import { getSavingIncome } from '../firebase/GetUserData';
+import { getUserId } from './DataHandler';
 import { submitExpenseInfo } from '../firebase/GetUserData';
 
 class Expenses extends Component {
@@ -12,23 +12,16 @@ class Expenses extends Component {
         this.getValidationStateForExpenseName = this.getValidationStateForExpenseName.bind(this);
         this.getValidationStateForExpenseValue = this.getValidationStateForExpenseValue.bind(this);
         this.formatForSubmit = this.formatForSubmit.bind(this);
-        this.onClick = this.onClick.bind(this)
+        this.handleClear = this.handleClear.bind(this);
+        this.onClick = this.onClick.bind(this);
 
-        var userId = firebase.auth().currentUser.uid;
-        var moneyValues = getSavingIncome(userId);
-        {/* DUMMY RIGHT NOW
-        var savings = moneyValues.savings;
-        var income = moneyValues.income;
-        */}
-        var savings = '$45.00';
-        var income = '$350.00';
 
         this.state = {
             userInfo: {
 
             },
-            income: income,
-            savings: savings,
+            income: '',
+            savings: '',
             basicExpenses: ['input-0'],
             /* get user's estimated monthly income from GetUserData */
             /* get user's estimated monthly savings from GetUserData */
@@ -43,7 +36,17 @@ class Expenses extends Component {
         };
     }
 
-    
+    componentDidMount() {
+        let userId = getUserId();
+        firebase.database().ref(userId).child('basicInfo').on('value', (snapshot) => {
+            var moneyValues = {};
+            moneyValues = {
+                savings: snapshot.val().savings,
+                income: snapshot.val().income
+            }
+            this.setState({income: moneyValues.income, savings: moneyValues.savings});
+        });
+    }    
 
     getValidationStateForExpenseName() {
         var input = this.state.expenses.name; // msArr["objectId"] !== undefined
@@ -179,12 +182,22 @@ class Expenses extends Component {
         });
     }
 
+    handleClear() {
+        this.setState({
+            housing: '',
+            utilities: '',
+            food: '',
+            transportation: '',
+            misc: '',
+        });
+    }
+
     toggleSuccess() {
         if (this.state.error) {
             this.setState({ error: !this.state.error })
         }
         this.setState({
-            success: !this.state.success
+            success: true
         })
     }
 
@@ -193,6 +206,7 @@ class Expenses extends Component {
     //This then passes the data to the GetUserData component.
     formatForSubmit(event) {
         event.preventDefault();
+        let submitable = this.handleError();
         let dataObject = {};
         dataObject.housing = this.state.housing;
         dataObject.transportation = this.state.transportation;
@@ -202,6 +216,7 @@ class Expenses extends Component {
         var userId = firebase.auth().currentUser.uid;
         submitExpenseInfo(userId, dataObject, 'expenseInfo').then(() => {
             this.toggleSuccess();
+            this.handleClear();
         }).catch((error) => {
             this.setState({ error: error.message });
         });
@@ -306,7 +321,7 @@ class Expenses extends Component {
                             ))}
                             <button type="button" onClick={this.handleAddExpense} className="small">Add Expense</button>
                             <Col xs={12} className="save-cancel-bar">
-                        <Button onClick={this.test}>Cancel</Button>
+                        <Button onClick={this.handleClear}>Cancel</Button>
 
                         <Button disabled={
                             this.getValidationStateForHousing() !== "success" ||

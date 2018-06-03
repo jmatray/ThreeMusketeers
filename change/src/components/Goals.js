@@ -13,6 +13,7 @@ class Goals extends Component {
         this.handleNecessityGoalChange = this.handleNecessityGoalChange.bind(this);
         this.handleDiscretionaryGoalChange = this.handleDiscretionaryGoalChange.bind(this);
         this.handleError = this.handleError.bind(this);
+        this.handleClear = this.handleClear.bind(this);
         this.formatForSubmit = this.formatForSubmit.bind(this);
 
         this.state = {
@@ -24,8 +25,8 @@ class Goals extends Component {
 
     getValidationStateForSavingsGoal() {
         var input = this.state.savingsGoal;
-        if (this.state.savingsGoal ==='Enter percentage here') {
-            return this.state.savingsGoal;
+        if (this.state.savingsGoal.length === 0) {
+            return null;
         }
         var regex = /[0-9]+/g; // change this
         if (regex.test(input)) {
@@ -41,8 +42,8 @@ class Goals extends Component {
 
     getValidationStateForNeccesityGoal() {
         var input = this.state.necessityGoal;
-        if (this.state.necessityGoal ==='Enter percentage here') {
-            return this.state.necessityGoal;
+        if (this.state.necessityGoal.length === 0) {
+            return null;
         }
         var regex = /[0-9]+/g; // change this
         if (regex.test(input)) {
@@ -58,8 +59,8 @@ class Goals extends Component {
 
     getValidationStateForDiscretionaryGoal() {
         var input = this.state.discretionaryGoal;
-        if (this.state.discretionaryGoal ==='Enter percentage here') {
-            return this.state.discretionaryGoal;
+        if (this.state.discretionaryGoal.length === 0) {
+            return null;
         }
         var regex = /[0-9]+/g; // change this
         if (regex.test(input)) {
@@ -87,8 +88,17 @@ class Goals extends Component {
         return submitable;
     }
 
+    handleClear() {
+        this.setState({
+            savingsGoal: '',
+            necessityGoal: '',
+            discretionaryGoal: ''
+        });
+    }
+
     formatForSubmit(event) {
         event.preventDefault();
+        this.setState({success: false});
         let submitable = this.handleError();
         let goalObj = {};
         goalObj.savings = this.state.savingsGoal;
@@ -96,8 +106,9 @@ class Goals extends Component {
         goalObj.desc = this.state.discretionaryGoal;
         var userId = firebase.auth().currentUser.uid;
         if (submitable) {
-            submitGoalInfo(userId, goalObj, 'goals').then(() => {
+            submitGoalInfo(userId, goalObj, 'goals').then(() => {        
                 this.toggleSuccess();
+                this.handleClear();
             }).catch((error) => {
                 this.setState({ error: error.message });
             });
@@ -121,7 +132,7 @@ class Goals extends Component {
                     Please fill out the information below to help us get an accurate picture of what your goals are. You can always edit this information later
                 </p> 
                 {this.state.success &&
-                    <p className="alert alert-success">{'Successfully Updated Your Expenses'}</p>
+                    <p className="alert alert-success">{'Successfully Updated Your Goals'}</p>
                 }
                 {this.state.error &&
                     <p className="alert alert-danger">{this.state.error}</p>
@@ -183,7 +194,7 @@ class Goals extends Component {
                 </Row>  
                 <Row>
                     <Col xs={12} className="save-cancel-bar">
-                        <Button>Cancel</Button>
+                        <Button onClick={this.handleClear}>Cancel</Button>
                         <Button disabled={
                             this.getValidationStateForSavingsGoal() !== "success" ||
                             this.getValidationStateForDiscretionaryGoal() !== "success" ||

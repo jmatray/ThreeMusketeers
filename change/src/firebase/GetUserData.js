@@ -48,8 +48,8 @@ export const getSavingIncome = (userId) =>
     db.ref(userId).child('basicInfo').on('value', (snapshot) => {
         var moneyValues = {};
         moneyValues = {
-            savings: snapshot.val().savings,
-            income: snapshot.val().income
+            savings: snapshot.val().basicInfo.savings,
+            income: snapshot.val().basicInfo.income
         }
         return moneyValues;
     })
