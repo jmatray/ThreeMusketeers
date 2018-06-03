@@ -11,6 +11,7 @@ class Expenses extends Component {
 
         this.getValidationStateForExpenseName = this.getValidationStateForExpenseName.bind(this);
         this.getValidationStateForExpenseValue = this.getValidationStateForExpenseValue.bind(this);
+        this.formatForSubmit = this.formatForSubmit.bind(this);
 
         this.onClick = this.onClick.bind(this)
 
@@ -34,29 +35,28 @@ class Expenses extends Component {
             /* get user's estimated monthly savings from GetUserData */
 
             name: '',
-        expenses: [{ name: '', value: '' }],
+            expenses: [{ name: '', value: '' }],
+            maxIndex: 0
         };
     }
 
-    
 
-    getValidationStateForExpenseName() {
-        var input = this.state.expenses.name; // msArr["objectId"] !== undefined
-        if (this.state.expenses.name === undefined) {
-            return this.state.expenses.name;
-        }
-        var regex = /[^a-zA-Z]+/g; // this could be wrong 
-        if (regex.test(input)) {
-            return 'success';
-        } else {
+
+    getValidationStateForExpenseName(idx) {
+        var input = this.state.expenses[idx].name; // msArr["objectId"] !== undefined
+        console.log(input);
+        if (this.state.expenses[idx].name === '') {
             return 'error';
+        } else {
+            return 'success';
         }
     }
 
-    getValidationStateForExpenseValue() {
-        var input = this.state.expenses["value"]; // msArr["objectId"] !== undefined
-        if (this.state.expenses["value"] === undefined) {
-            return this.state.expenses["value"];
+    getValidationStateForExpenseValue(idx) {
+        var input = this.state.expenses[idx].value; // msArr["objectId"] !== undefined
+        console.log(input)
+        if (this.state.expenses[idx].value === '') {
+            return 'error';
         }
         var regex = /^\d+(?:\.\d{1,2})?$/; // this could be wrong
         if (regex.test(input)) {
@@ -81,47 +81,58 @@ class Expenses extends Component {
 
     handleExpenseNameChange = (idx) => (evt) => {
         const newExpenses = this.state.expenses.map((expense, sidx) => {
-          if (idx !== sidx) return expense;
-          return { ...expense, name: evt.target.value };
+            if (idx !== sidx) return expense;
+            return { ...expense, name: evt.target.value };
         });
-    
+
         this.setState({ expenses: newExpenses });
-      }
+    }
 
     handleExpenseValueChange = (idx) => (evt) => {
         const newExpenses = this.state.expenses.map((expense, sidx) => {
             if (idx !== sidx) return expense;
             return { ...expense, value: evt.target.value };
-          });
-      
-          this.setState({ expenses: newExpenses });
+        });
+
+        this.setState({ expenses: newExpenses });
     }
-    
-      handleSubmit = (evt) => {
+
+    handleSubmit = (evt) => {
         const { name, expenses } = this.state;
         alert(`Incorporated: ${name} with ${expenses.length} Expenses`);
-      }
-    
-      handleAddExpense = () => {
-        this.setState({
-          expenses: this.state.expenses.concat([{ name: '', value: '' }])
-        });
-      }
-    
-      handleRemoveExpense = (idx) => () => {
-        this.setState({
-          expenses: this.state.expenses.filter((s, sidx) => idx !== sidx)
-        });
-      }
+    }
 
-      //Fills out userData object and calls the submitBasicInfo() function.
+    handleAddExpense = () => {
+        this.setState({
+            expenses: this.state.expenses.concat([{ name: '', value: '' }]),
+            maxIndex: this.state.expenses.length + 1
+        });
+    }
+
+    handleRemoveExpense = (idx) => () => {
+        this.setState({
+            expenses: this.state.expenses.filter((s, sidx) => idx !== sidx)
+        });
+    }
+    handleCheck = (idx) => (evt) => {
+        console.log('here')
+        console.log(evt.target.value)
+        const newExpenses = this.state.expenses.map((expense, sidx) => {
+            if (idx !== sidx) return expense;
+            return { ...expense, type: evt.target.value };
+        });
+        this.setState({ expenses: newExpenses });
+    }
+
+    //Fills out userData object and calls the submitBasicInfo() function.
     //This then passes the data to the GetUserData component.
     formatForSubmit(event) {
         event.preventDefault();
-        let dataObject = { ...this.state.userInfo };
-        dataObject.discretionary1 = this.state.expenses[0];
+        // let dataObject = { ...this.state.userInfo };
+        // dataObject.expenses = this.state.expenses;
         var userId = firebase.auth().currentUser.uid;
-        submitExpenseInfo(userId, dataObject, 'expenseInfo');
+        console.log(this.state.expenses)
+        submitExpenseInfo(userId, this.state.expenses, 'expenseInfo');
     }
 
     render() {
@@ -146,35 +157,59 @@ class Expenses extends Component {
 
                             {this.state.expenses.map((expense, idx) => (
                                 <div className="Expense">
-                                    <input
-                                        type="text"
-                                        placeholder={`Expense ${idx + 1} name`}
-                                        value={expense.name}
-                                        onChange={this.handleExpenseNameChange(idx)}
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder={`Expense ${idx + 1} Amount`}
-                                        value={expense.value}
-                                        onChange={this.handleExpenseValueChange(idx)}
-                                    />
-                                    <button type="button" onClick={this.handleRemoveExpense(idx)} className="small">-</button>
+                                    <FormGroup
+                                        controlId="formBasicText"
+                                        validationState={this.getValidationStateForExpenseName(idx)}
+                                    >
+                                        <ControlLabel>Expense Name</ControlLabel>
+                                        <FormControl
+                                            type="text"
+                                            value={expense.name}
+                                            placeholder="Enter text"
+                                            onChange={this.handleExpenseNameChange(idx)}
+                                        />
+                                        <FormControl.Feedback />
+                                        <HelpBlock>Please enter a name for this expense</HelpBlock>
+                                    </FormGroup>
+                                    <FormGroup
+                                        controlId="formBasicText"
+                                        validationState={this.getValidationStateForExpenseValue(idx)}
+                                    >
+                                        <ControlLabel>Expense value</ControlLabel>
+                                        <FormControl
+                                            type="text"
+                                            value={expense.value}
+                                            placeholder="Enter expense amount"
+                                            onChange={this.handleExpenseValueChange(idx)}
+                                        />
+                                        <FormControl.Feedback />
+                                        <HelpBlock>Please enter amount in dollar and cent form</HelpBlock>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <ControlLabel>Is this Expense a necessity?</ControlLabel>
+                                    <Checkbox onChange={this.handleCheck(idx)} name='expense-type' value='necessity'>
+                                        Yes
+                                    </Checkbox>
+                                    <Checkbox onChange={this.handleCheck(idx)} name='expense-type' value='discretionary'>
+                                        No
+                                    </Checkbox>
+                                    </FormGroup>
+                                    <button type="button" onClick={this.handleRemoveExpense(idx)} className="small">- Remove Expense</button>
                                 </div>
                             ))}
                             <button type="button" onClick={this.handleAddExpense} className="small">Add Expense</button>
                             <Col xs={12} className="save-cancel-bar">
-                        <Button>Cancel</Button>
+                                <Button>Cancel</Button>
 
-                        <Button disabled={
-                            this.getValidationStateForExpenseName() !== "success" ||
-                            this.getValidationStateForExpenseValue() !== "success"}
-                            onClick={this.formatForSubmit}>Save</Button>
-                    </Col>
+                                <Button
+
+                                    onClick={this.formatForSubmit}>Save</Button>
+                            </Col>
                         </form>
                     </Col>
                 </Row>
                 <Row>
-                    
+
                 </Row>
             </div>
         );
