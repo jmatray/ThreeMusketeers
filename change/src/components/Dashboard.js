@@ -3,18 +3,13 @@ import '../App.css';
 import firebase from 'firebase';
 import { Row, Col, Table, ProgressBar } from 'react-bootstrap';
 import { BarChart, PieChart, Pie, Tooltip, CartesianGrid, XAxis, YAxis, Legend, Bar } from 'recharts';
+import {getUserId, formatExpenses} from './DataHandler';
 
 class Dashboard extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            current: [
-                { name: 'Savings', value: 70.00,},
-                { name: 'Housing', value: 1350.00},
-                { name: 'Food', value: 378.00},
-                { name: 'Clothes', value: 400.00},
-                { name: 'Transportation', value: 200.00}
-            ],
+            
 
             suggested: [
                 { name: 'Savings', value: 300.00,},
@@ -42,29 +37,35 @@ class Dashboard extends Component {
 
     componentDidMount() {
         var comparison = [];
+        let userId = getUserId();
+        firebase.database().ref('11111').once('value', (snapshot) => {
+            let data = snapshot.val();
+            this.setState({ current: formatExpenses(data) });
+        }).then(() => {
+            //populate an overall array that contains expense categories and the different amounts in them
+            for (let i = 0; i < this.state.current.length; i++) {
+                var progressStatus = '';
+                var calc = (this.state.thisMonth[i].value / this.state.suggested[i].value);
+                if (.90 <= calc && calc <= .99) {
+                    progressStatus = 'warning';
+                }
+                if (calc > .99) {
+                    progressStatus = 'danger';
+                }
+                if (calc < .9) {
+                    progressStatus = 'success';
+                }
+                comparison[i] = {
+                    name: this.state.current[i].name,
+                    current: this.state.current[i].value,
+                    suggested: this.state.suggested[i].value,
+                    thisMonth: this.state.thisMonth[i].value,
+                    progressStyle: progressStatus
+                }
+            }
+            this.setState({ comparisons: comparison });
+        });
 
-        //populate an overall array that contains expense categories and the different amounts in them
-        for (let i = 0; i < this.state.current.length; i++) {
-            var progressStatus = '';
-            var calc = (this.state.thisMonth[i].value / this.state.suggested[i].value);
-            if (.90 <= calc && calc <= .99) {
-                progressStatus = 'warning';
-            }
-            if ( calc > .99 ) {
-                progressStatus = 'danger';
-            }
-            if (calc < .9) {
-                progressStatus = 'success';
-            }
-            comparison[i] = {
-                name: this.state.current[i].name,
-                current: this.state.current[i].value,
-                suggested: this.state.suggested[i].value,
-                thisMonth: this.state.thisMonth[i].value,
-                progressStyle: progressStatus
-            }
-        }
-        this.setState({comparisons: comparison});
     }
 
     render() {

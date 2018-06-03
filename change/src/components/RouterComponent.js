@@ -9,14 +9,14 @@ import Goals from './Goals';
 import firebase from 'firebase';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import IncorporationForm from './altExpense.js';
-
+import {data, formatExpenses} from './DataHandler';
 
 class RouterComponent extends Component {
     //renders nav bar along with react router for navigation
 
     //handles when user signs out, signs them out of firebase
     onSignOut() {
-        firebase.auth().signOut();
+        formatExpenses(data);
     }
 
     render() {
