@@ -24,8 +24,20 @@
   background-color: aliceblue;
 }
 
-.form-group{
+.form-group, .expense-input {
   margin: 10px;
+}
+
+.input {
+  margin: 10px;
+}
+
+.button {
+  margin-top: 50px;
+}
+
+#value {
+  margin-left: 25px;
 }
 
 #auth-container {

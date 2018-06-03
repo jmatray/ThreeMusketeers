@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './App.css';
+import '../App.css';
 import { Row, Col, FormGroup, ControlLabel, FormControl, HelpBlock, Button, Checkbox } from 'react-bootstrap';
 import firebase from 'firebase';
 import { getUserId } from './DataHandler';
@@ -237,20 +237,24 @@ class Expenses extends Component {
                 </p>
 
                 <Row>
-                    <Col xs={4}>
-                        <p> Estimated monthly income </p>
-                        <span>{this.state.income}</span>
-                        <p> Estimated monthly savings </p>
-                        <span>{this.state.savings}</span>
+                    <Col xs={4} className="expense-input">
+                        <p> Estimated monthly income 
+                            <span id="value">{this.state.income}</span>
+                        </p>
+                        <p> Estimated monthly savings 
+                            <span id="value">{this.state.savings}</span>
+                        </p>
                     </Col>
                     <Col xs={6}>
-                        <form onSubmit={this.handleSubmit}>
+                        <form className="format-form" onSubmit={this.handleSubmit}>
                             {/* ... */}
                             <h4>Expenses</h4>
+                            <div className="expense-input">
                             <label for="housing">
                                         Housing
                                     </label>
                                     <input
+                                        className="input"
                                         type="text"
                                         placeholder={`Amount`}
                                         id="housing"
@@ -258,10 +262,13 @@ class Expenses extends Component {
                                         value={this.state.housing}
                                         onChange={(event) => { this.updateForm(event) }}
                                     />
+                                    </div>
+                                    <div className="expense-input">
                                     <label for="utilities">
                                         Utilities
                                     </label>
                                     <input
+                                        className="input"
                                         type="text"
                                         placeholder={`Amount`}
                                         id="utilities"
@@ -269,10 +276,13 @@ class Expenses extends Component {
                                         value={this.state.utilities}
                                         onChange={(event) => { this.updateForm(event) }}
                                     />
+                                    </div>
+                                    <div className="expense-input">
                                     <label for="food">
                                         Food
                                     </label>
                                     <input
+                                        className="input"
                                         type="text"
                                         placeholder={`Amount`}
                                         id="food"
@@ -280,10 +290,13 @@ class Expenses extends Component {
                                         value={this.state.food}
                                         onChange={(event) => { this.updateForm(event) }}
                                     />
+                                    </div>
+                                    <div className="expense-input">
                                     <label for="transportation">
                                         Transportation
                                     </label>
                                     <input
+                                        className="input"
                                         type="text"
                                         placeholder={`Amount`}
                                         id="transportation"
@@ -291,10 +304,13 @@ class Expenses extends Component {
                                         value={this.state.transportation}
                                         onChange={(event) => { this.updateForm(event) }}
                                     />
+                                    </div>
+                                    <div className="expense-input">
                                     <label for="miscellaneous">
                                         Miscellaneous
                                     </label>
                                     <input
+                                        className="input"
                                         type="text"
                                         placeholder={`Amount`}
                                         id="miscellaneous"
@@ -302,15 +318,18 @@ class Expenses extends Component {
                                         value={this.state.misc}
                                         onChange={(event) => { this.updateForm(event) }}
                                     />
+                                    </div>
                             {this.state.expenses.map((expense, idx) => (                               
                                 <div className="Expense">
                                     <input
+                                        className="input"
                                         type="text"
                                         placeholder={`Expense ${idx + 1} name`}
                                         value={expense.name}
                                         onChange={this.handleExpenseNameChange(idx)}
                                     />
                                     <input
+                                        className="input"
                                         type="text"
                                         placeholder={`Expense ${idx + 1} Amount`}
                                         value={expense.value}
@@ -319,15 +338,18 @@ class Expenses extends Component {
                                     <button type="button" onClick={this.handleRemoveExpense(idx)} className="small">-</button>
                                 </div>
                             ))}
-                            <button type="button" onClick={this.handleAddExpense} className="small">Add Expense</button>
+                            <button type="button" onClick={this.handleAddExpense} className="input">Add Expense</button>
                             <Col xs={12} className="save-cancel-bar">
-                        <Button onClick={this.handleClear}>Cancel</Button>
+                        <Button 
+                            className="button"
+                            onClick={this.handleClear}>Cancel</Button>
 
                         <Button disabled={
                             this.getValidationStateForHousing() !== "success" ||
                             this.getValidationStateForUtilities() !== "success" ||
                             this.getValidationStateForFood() !== "success" ||
                             this.getValidationStateForTransportation() !== "success"}
+                            className="button"
                             onClick={this.formatForSubmit}>Save</Button>
                     </Col>
                         </form>
