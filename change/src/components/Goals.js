@@ -138,7 +138,7 @@ class Goals extends Component {
                     <p className="alert alert-danger">{this.state.error}</p>
                 } 
                 <Row>
-                    <Col>
+                    <Col xs={8}>
                         <form>  
                                 <FormGroup
                                 controlId="formBasicText"

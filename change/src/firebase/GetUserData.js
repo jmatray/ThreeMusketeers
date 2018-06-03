@@ -21,15 +21,13 @@ export const submitBasicInfo = (userId, dataObject, category) =>
 
 //TODO: change set discretionary goals to a dynamic number of them
 export const submitExpenseInfo = (userId, dataObject, category) =>
-
-    dataObject.forEach(element => {
-        db.ref(userId +'/'+category).child(element.name).set({
-            value: [element.value],
-            type: [element.type]
-        });
-
+    db.ref(userId +'/'+category).set({
+        housing: dataObject.housing,
+        utilities: dataObject.utilities,
+        food: dataObject.food,
+        transportation: dataObject.transportation,
+        misc: dataObject.misc
     });
-    
 
 //Function that handles information submit from the GoalInfo component.
 //Takes in the userID of the current user, the category of GoalInfo, 
