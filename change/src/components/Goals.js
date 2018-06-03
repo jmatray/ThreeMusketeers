@@ -11,6 +11,7 @@ class Goals extends Component {
         this.handleSavingsGoalChange = this.handleSavingsGoalChange.bind(this);
         this.handleNecessityGoalChange = this.handleNecessityGoalChange.bind(this);
         this.handleDiscretionaryGoalChange = this.handleDiscretionaryGoalChange.bind(this);
+        this.handleError = this.handleError.bind(this);
 
         this.state = {
             savingsGoal: '',
@@ -70,14 +71,14 @@ class Goals extends Component {
         this.setState({ discretionaryGoal: e.target.value });
     }
 
-    onClick(e) {
-        var total = this.state.savingsGoal + this.state.discretionaryGoal + this.state.necessityGoal;
+    handleError(e) {
+        var total = Number(this.state.savingsGoal) + Number(this.state.discretionaryGoal) + Number(this.state.necessityGoal);
         if (this.state.savingsGoal >= 40) {
             window.alert("Suggested percentage of savings is 15-20%. You are attempting to save at least double that, that may be too ambitious")
         } else if (this.state.discretionaryGoal >= 50) {
             window.alert("Discretionary spending is typically 30% of one’s budget")
         } else if (total != 100) {
-            window.alert("Adjust your goals to add up to exactly 100%")
+            window.alert("Adjust your goals to add up to exactly 100%. your total now is " + total)
         }
     }
 
@@ -150,7 +151,8 @@ class Goals extends Component {
                             this.getValidationStateForSavingsGoal() !== "success" ||
                             this.getValidationStateForDiscretionaryGoal() !== "success" ||
                             this.getValidationStateForNeccesityGoal() !== "success"}
-                            onClick={this.formatForSubmit}>Save</Button>
+                            onClick={this.formatForSubmit}
+                            onClick={this.handleError}>Save</Button>
                     </Col>
                 </Row>
             </div>    
