@@ -115,63 +115,63 @@ Once the user account has successfully been created, the user will then be redir
 
 
 ## Notification Settings
-* Upon entering the page, users must be able to view the entire contents of the page, without needing to scroll 
-* There are two options, one asking for how often users would like to receive notifications and the other asking for the method in which users would like to receive them
+* [complete] Upon entering the page, users must be able to view the entire contents of the page, without needing to scroll 
+* [complete] There are two options, one asking for how often users would like to receive notifications and the other asking for the method in which users would like to receive them
 
    ### How often
-   * A drop down selector will be displayed on the right-hand side of the screen with an accompanying label to the left of it
-   * This selector will have three options, one for receiving notification weekly, another for every two weeks, and one for notifications for once a month
-   * Users will then select the option that they would like and that information will be saved as a state in the user’s account
-   * This data will be passed to Firebase’s notification services
-   * Users can return to this page via a link on the navigation bar 
-     * Updates made to the notification time or method will again be saved as a state within the user object, replacing what was currently there
+   * [complete] A drop down selector will be displayed on the right-hand side of the screen with an accompanying label to the left of it
+   * [incomplete-in different format] This selector will have three options, one for receiving notification weekly, another for every two weeks, and one for notifications for once a month
+   * [complete] Users will then select the option that they would like and that information will be saved as a state in the user’s account
+   * [complete] This data will be passed to Firebase’s notification services
+   * [complete] Users can return to this page via a link on the navigation bar 
+     * [complete] Updates made to the notification time or method will again be saved as a state within the user object, replacing what was currently there
    ### Method
-   * Several checkboxes will be displayed beneath the dropdown menu (the one determining frequency of notifications) with an accompanying label to the left it
-   * The label will ask how users would like to receive notifications and will prompt the user to check all the boxes that apply
-   * The boxes will have options for email, text, in-app, all of the above, and preferring not to receive notifications
-     * If the user attempts to save this page without checking one of these boxes, an alert will appear prompting the user to select one of the boxes
-     * If the email box is checked, an input box below the method checkboxes will appear with a label to its left asking for the user to input their email
-     * If the text box is checked, an input box below the method checkboxes will appear with a label to its left asking for the user to input their phone number
+   * [incomplete-in different format] Several checkboxes will be displayed beneath the dropdown menu (the one determining frequency of notifications) with an accompanying label to the left it
+   * [incomplete-in different format] The label will ask how users would like to receive notifications and will prompt the user to check all the boxes that apply
+   * [incomplete-in differnt format] The boxes will have options for email, text, in-app, all of the above, and preferring not to receive notifications
+     * [incomplete] If the user attempts to save this page without checking one of these boxes, an alert will appear prompting the user to select one of the boxes
+     * [incomplete] If the email box is checked, an input box below the method checkboxes will appear with a label to its left asking for the user to input their email
+     * [incomplete] If the text box is checked, an input box below the method checkboxes will appear with a label to its left asking for the user to input their phone number
 
 ## Dashboard
-* The dashboard will feature the same navigation bar that is available on all other components
-* In the upper-left corner will be a section containing the users’ current financial goals. 
-  * The goals box will display each goal in a vertical list, with the least recently created goal appearing first. 
-  * The goals will be labeled as “Goal 1”, “Goal 2”, etc. 
-  * Each goal will be displayed as the label for the goal, the actual content of the goal underneath it (what is the goal and what do we do for it), and a progress bar to the right of the text.
-    * The progress bar will indicate how close the user is to achieving their goal. As the user reports that they are getting closer to their goal, for example, by reporting how much they have saved towards a specific amount, this information will be saved as a percentage of goal completion. When this information is pulled from the database, the percentage can be used to specify how much of the bar to fill.
-  * When a goal is completed, i.e. when the percentage reaches 100, the goal will remain on the screen with a text flag stating that the goal is complete until the user enters in a new goal to replace it.
-  * In the top right corner of the container will be a link titled “Edit Goals”. Clicking this link will redirect the user to the Goal Setting page, where the user can update, remove, or create new goals. These updates will again be pushed to firebase while the user is on that page, and when the user returns to the dashboard, these changes will be shown upon re-rendering of the dashboard. The edit goals link facilitates the same redirecting/navigation as opening the navigation bar and clicking the goals tab.
+* [complete] The dashboard will feature the same navigation bar that is available on all other components
+* [complete] In the upper-left corner will be a section containing the users’ current financial goals. 
+  * [complete] The goals box will display each goal in a vertical list, with the least recently created goal appearing first. 
+  * [incomplete] The goals will be labeled as “Goal 1”, “Goal 2”, etc. 
+  * [incomplete] Each goal will be displayed as the label for the goal, the actual content of the goal underneath it (what is the goal and what do we do for it), and a progress bar to the right of the text.
+    * [complete] The progress bar will indicate how close the user is to achieving their goal. As the user reports that they are getting closer to their goal, for example, by reporting how much they have saved towards a specific amount, this information will be saved as a percentage of goal completion. When this information is pulled from the database, the percentage can be used to specify how much of the bar to fill.
+  * [incomplete] When a goal is completed, i.e. when the percentage reaches 100, the goal will remain on the screen with a text flag stating that the goal is complete until the user enters in a new goal to replace it.
+  * [incomplete] In the top right corner of the container will be a link titled “Edit Goals”. Clicking this link will redirect the user to the Goal Setting page, where the user can update, remove, or create new goals. These updates will again be pushed to firebase while the user is on that page, and when the user returns to the dashboard, these changes will be shown upon re-rendering of the dashboard. The edit goals link facilitates the same redirecting/navigation as opening the navigation bar and clicking the goals tab.
 
-* In the bottom-left corner, a panel/section titled “Spending” contains information about how much a user is currently spending on categories of expenses per month, what the application suggests the user should be spending, what they have spent so far this month, and whether the user is over and/or under budget
-  * The categories of expenses the user has previously inputted will appear under “Spending” on the very left of the section under the subheading “Category..” For example, if the user inputted the category names “housing,” “Starbucks,” and “vacation” on the screen to add expenses, those names will appear under “Category.”
-  * What the user is currently spending on categories of expenses will appear under “Spending” to the right of the Category column with the subheading “Current.” Under “Current” should display numerical values representing how much a user is currently spending per relevant category in US currency.
-  * Using the user’s inputted goals and spending on different categories, the app will determine the suggested amount of money the user should be spending on different categories for month. This information will appear under the “Suggested” column, which will be under the “Spending” title and to the right of the “Current” column.
-  * Given the user’s updated expenses for the month (on a different screen, the user signs up for notifications to update expenses every so often and when notified, update how much they have spent on categories expenses in that period of time), the app will display how much the user has spent on different categories of expenses for the month so far. This information will appear under the “This Month” column, which will be under the “Spending” title and to the right of the “Suggested” column.
-  * On the bottom row of the panel/section, a row displaying whether a user is under/over budget will appear with the title “Under/Over Budget” on the left bottom of the panel. To its right will be numerical values representing US currency that is positive or negative to indicate whether a user is under or over budget. For example, in the “Current” column and “Under/Over Budget” row, “-$450” will show a user is $450 under budget with their current spending patterns; a “+$500” in the “Suggested” column and “Under/Over Budget” row will show that if a user follows the suggested spending on categories, the user will be $500 over budget.
-  * At the top right corner of the panel/section is an “Edit” button. If a user clicks on “Edit,” they will be redirected to the screen that prompts users to input information about expenses so they may adjust how much they are spending and what they are spending on.
-* To the right of the “Goal” box will be a radial/pie chart titled “Overall Breakdown”. This display will take all of the various categories that the user spends money on (food, coffee, housing, etc.) and display these categories on the pie chart based on how much the user spends in each category.
-  * This will rely on the data that the user has previously input into the application. When pulling data from firebase, the radial chart will take the percentages that each category makes up of the total income, and will use those percentages when rendering the radial display slices. 
-  * As the user updates their spending habits, the percentages will change and so will the radial display to reflect that.
-  * When each slice of the pie chart is rendered, a small modal accompanying each section must also be created. This modal should be opened when the user hovers over the slice with their cursor. The modal will contain the name of the category, as well as the numerical percentage amount for the category.
-* Below the “Overall Breakdown” display will be a bar diagram titled “Actual vs Suggested Spending”. This bar diagram will compare the suggested spending amounts for the user to what they currently spend in each category.
-  * The amounts of what the user currently spends in each category are what the user input on the “Set Your Expenses Page”. The amounts that the user reported spending in each category they defined will be used to determine the heights of the bars when rendering the bar chart. 
-    * All of the current expense bars will be the same color to make comparison easier. 
-  * The suggested amounts will come from the budget that is suggested for the user based on the “Set Your Expenses” page results. The suggested amounts that the user should be spending will determine the heights of the suggested bars
-    * The suggested expense bars will all be the same color, but their color will contrast the current expense color enough to facilitate easy comparison.
+* [complete] In the bottom-left corner, a panel/section titled “Spending” contains information about how much a user is currently spending on categories of expenses per month, what the application suggests the user should be spending, what they have spent so far this month, and whether the user is over and/or under budget
+  * [complete] The categories of expenses the user has previously inputted will appear under “Spending” on the very left of the section under the subheading “Category..” For example, if the user inputted the category names “housing,” “Starbucks,” and “vacation” on the screen to add expenses, those names will appear under “Category.”
+  * [complete] What the user is currently spending on categories of expenses will appear under “Spending” to the right of the Category column with the subheading “Current.” Under “Current” should display numerical values representing how much a user is currently spending per relevant category in US currency.
+  * [complete] Using the user’s inputted goals and spending on different categories, the app will determine the suggested amount of money the user should be spending on different categories for month. This information will appear under the “Suggested” column, which will be under the “Spending” title and to the right of the “Current” column.
+  * [incomplete] Given the user’s updated expenses for the month (on a different screen, the user signs up for notifications to update expenses every so often and when notified, update how much they have spent on categories expenses in that period of time), the app will display how much the user has spent on different categories of expenses for the month so far. This information will appear under the “This Month” column, which will be under the “Spending” title and to the right of the “Suggested” column.
+  * [incomplete] On the bottom row of the panel/section, a row displaying whether a user is under/over budget will appear with the title “Under/Over Budget” on the left bottom of the panel. To its right will be numerical values representing US currency that is positive or negative to indicate whether a user is under or over budget. For example, in the “Current” column and “Under/Over Budget” row, “-$450” will show a user is $450 under budget with their current spending patterns; a “+$500” in the “Suggested” column and “Under/Over Budget” row will show that if a user follows the suggested spending on categories, the user will be $500 over budget.
+  * [incomplete] At the top right corner of the panel/section is an “Edit” button. If a user clicks on “Edit,” they will be redirected to the screen that prompts users to input information about expenses so they may adjust how much they are spending and what they are spending on.
+* [complete] To the right of the “Goal” box will be a radial/pie chart titled “Overall Breakdown”. This display will take all of the various categories that the user spends money on (food, coffee, housing, etc.) and display these categories on the pie chart based on how much the user spends in each category.
+  * [complete] This will rely on the data that the user has previously input into the application. When pulling data from firebase, the radial chart will take the percentages that each category makes up of the total income, and will use those percentages when rendering the radial display slices. 
+  * [complete] As the user updates their spending habits, the percentages will change and so will the radial display to reflect that.
+  * [complete] When each slice of the pie chart is rendered, a small modal accompanying each section must also be created. This modal should be opened when the user hovers over the slice with their cursor. The modal will contain the name of the category, as well as the numerical percentage amount for the category.
+* [complete] Below the “Overall Breakdown” display will be a bar diagram titled “Actual vs Suggested Spending”. This bar diagram will compare the suggested spending amounts for the user to what they currently spend in each category.
+  * [complete] The amounts of what the user currently spends in each category are what the user input on the “Set Your Expenses Page”. The amounts that the user reported spending in each category they defined will be used to determine the heights of the bars when rendering the bar chart. 
+    * [complete] All of the current expense bars will be the same color to make comparison easier. 
+  * [complete] The suggested amounts will come from the budget that is suggested for the user based on the “Set Your Expenses” page results. The suggested amounts that the user should be spending will determine the heights of the suggested bars
+    * [complete] The suggested expense bars will all be the same color, but their color will contrast the current expense color enough to facilitate easy comparison.
   * Since the current expense amounts are subject to change from month to month, this bar chart will likely change as the user interacts with the application over time.
-* On the right-hand side of the screen to the left of the “Overall Breakdown” and “Actual vs. Suggested Spending” displays will be a display that shows progress bars with each category of expenses and the suggested amount of spending on that category per month versus how much the user has already spent so far on that category per month. Starting at the top of the section, the name of a category of expenses will be displayed with a progress bar under it. For example, if one category is “Starbucks,” suggested spending is $50 a month and spending this month so far is $25, “Starbucks” will appear at the top of the section, the progress bar will be half full (going from left to right) in green, and “50%” will appear over the visual to indicate the user is 50% of the way to suggested spending.
-  * If a user is 90-99% of the way to their suggested spending, the filling of the progress bar will be yellow.
-  * If a user has spent the amount suggested for that category of expenses or above, the progress bar will be red. 
+* [complete] On the right-hand side of the screen to the left of the “Overall Breakdown” and “Actual vs. Suggested Spending” displays will be a display that shows progress bars with each category of expenses and the suggested amount of spending on that category per month versus how much the user has already spent so far on that category per month. Starting at the top of the section, the name of a category of expenses will be displayed with a progress bar under it. For example, if one category is “Starbucks,” suggested spending is $50 a month and spending this month so far is $25, “Starbucks” will appear at the top of the section, the progress bar will be half full (going from left to right) in green, and “50%” will appear over the visual to indicate the user is 50% of the way to suggested spending.
+  * [complete] If a user is 90-99% of the way to their suggested spending, the filling of the progress bar will be yellow.
+  * [complete] If a user has spent the amount suggested for that category of expenses or above, the progress bar will be red. 
 
 ## Notification/Reminder (In App)
-* Users will receive reminders if they have not updated their spending information within the time period that they specified on the “Notification Settings” page. This time frame will be enforced via a timestamp saved in firebase when the user updates their spending information. This timestamp will be compared against the current date. 
-  * The notification will appear in the app. A badge will appear on the navigation bar, indicating that the user has a pending notification. 
-  * When the user selects the notification icon (a bell in the navigation bar) the notification modal will open on the user’s screen (in the middle)
-  * This modal will remind the user to update their spending information in order to make the application more accurate. 
-    * Text: “Don’t forget to update how much you have spent this month! Doing so helps us help you reach your goals.”
-  * The modal will have two options for closing it at the bottom. 
-    * The Edit button will redirect the user to the Input Spending page of the application, where they can update their spending habits. 
-      * The edit button should be a color that contrasts the background of the modal, and is significantly darker than the ignore button
-    * The Ignore button will dismiss the modal, closing it and allowing the user to continue interacting with the screen they were previously on. The timestamp will not be reset however; meaning the user will constantly have the notification badge until they actually update their spending data
+* [complete] Users will receive reminders if they have not updated their spending information within the time period that they specified on the “Notification Settings” page. This time frame will be enforced via a timestamp saved in firebase when the user updates their spending information. This timestamp will be compared against the current date. 
+  * [complete] The notification will appear in the app. A badge will appear on the navigation bar, indicating that the user has a pending notification. 
+  * [complete] When the user selects the notification icon (a bell in the navigation bar) the notification modal will open on the user’s screen (in the middle)
+  * [complete] This modal will remind the user to update their spending information in order to make the application more accurate. 
+    * [complete] Text: “Don’t forget to update how much you have spent this month! Doing so helps us help you reach your goals.”
+  * [complete] The modal will have two options for closing it at the bottom. 
+    * [complete] The Edit button will redirect the user to the Input Spending page of the application, where they can update their spending habits. 
+      * [complete] The edit button should be a color that contrasts the background of the modal, and is significantly darker than the ignore button
+    * [complete] The Ignore button will dismiss the modal, closing it and allowing the user to continue interacting with the screen they were previously on. The timestamp will not be reset however; meaning the user will constantly have the notification badge until they actually update their spending data
 
