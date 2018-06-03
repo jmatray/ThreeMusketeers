@@ -24,6 +24,7 @@ class AuthHandler extends Component {
                     user: User,
                     signUpEmail: '',
                     signUpPassword: '',
+                    confSignUpPassword: '',
                     signUpError: '',
                     logInEmail: '',
                     logInPassword: '',
@@ -33,21 +34,37 @@ class AuthHandler extends Component {
             } else {
                 this.setState({
                     user: null
-                })
+                });
             }
         })
     }
 
+    checkPassword() {
+        let pass = this.state.signUpPassword;
+        let conf = this.state.confSignUpPassword;
+        let same;
+        if(pass === conf) {
+            same = true;
+        } else {
+            same = false;
+        }
+        return same;
+    }
+
     //handles when user has signed up, sends user info to firebase
     onSignUp() {
-        firebase.auth().createUserWithEmailAndPassword(this.state.signUpEmail,
-            this.state.signUpPassword).then(User => {
-                return User.updateProfile({
-                    displayName: this.state.username
-                })
-            }).catch(err => {
-                this.setState({ signUpError: err.message })
-            });
+        if (this.checkPassword()) {
+            firebase.auth().createUserWithEmailAndPassword(this.state.signUpEmail,
+                this.state.signUpPassword).then(User => {
+                    return User.updateProfile({
+                        displayName: this.state.username
+                    })
+                }).catch(err => {
+                    this.setState({ signUpError: err.message })
+                });
+        } else {
+            this.setState({signUpError: "Passwords do not match"})
+        }
     }
 
     onChange(event) {
@@ -104,10 +121,10 @@ class AuthHandler extends Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <input className="form-control"
-                                            name="username"
-                                            placeholder={"Username"}
-                                            value={this.state.username}
+                                        <input type="password" className="form-control"
+                                            name="confSignUpPassword"
+                                            placeholder={"Confirm Password"}
+                                            value={this.state.confSignUpPassword}
                                             onChange={(event) => { this.onChange(event) }}
                                         />
                                     </div>
