@@ -197,7 +197,7 @@ class BasicInfo extends Component {
                             >
                                 <ControlLabel>Estimated Monthly Income</ControlLabel>
                                 <FormControl
-                                    type="text"
+                                    type="number"
                                     value={this.state.incomeValue}
                                     placeholder="Enter text"
                                     onChange={this.handleIncomeChange}
@@ -213,7 +213,7 @@ class BasicInfo extends Component {
                             >
                                 <ControlLabel>Estimated Monthly Savings</ControlLabel>
                                 <FormControl
-                                    type="text"
+                                    type="number"
                                     value={this.state.savingsValue}
                                     placeholder="Enter text"
                                     onChange={this.handleSavingsChange}

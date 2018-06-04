@@ -94,7 +94,8 @@ class Expenses extends Component {
         let val = event.target.value;
         let field = event.target.name;
         let change = {};
-        change[field] = val;
+        var number = Number(val);
+        change[field] = number;
         this.setState(change);
     }
 
@@ -162,6 +163,8 @@ class Expenses extends Component {
     handleExpenseValueChange = (idx) => (evt) => {
         const newExpenses = this.state.expenses.map((expense, sidx) => {
             if (idx !== sidx) return expense;
+            var number = Number(evt.target.value);
+            console.log(number);
             return { ...expense, value: evt.target.value };
           });
       
@@ -258,7 +261,7 @@ class Expenses extends Component {
                                     </label>
                                     <input
                                         className="input"
-                                        type="text"
+                                        type="number"
                                         placeholder={`Amount`}
                                         id="housing"
                                         name="housing"
@@ -272,7 +275,7 @@ class Expenses extends Component {
                                     </label>
                                     <input
                                         className="input"
-                                        type="text"
+                                        type="number"
                                         placeholder={`Amount`}
                                         id="utilities"
                                         name="utilities"
@@ -286,7 +289,7 @@ class Expenses extends Component {
                                     </label>
                                     <input
                                         className="input"
-                                        type="text"
+                                        type="number"
                                         placeholder={`Amount`}
                                         id="food"
                                         name="food"
@@ -300,7 +303,7 @@ class Expenses extends Component {
                                     </label>
                                     <input
                                         className="input"
-                                        type="text"
+                                        type="number"
                                         placeholder={`Amount`}
                                         id="transportation"
                                         name="transportation"
@@ -314,7 +317,7 @@ class Expenses extends Component {
                                     </label>
                                     <input
                                         className="input"
-                                        type="text"
+                                        type="number"
                                         placeholder={`Amount`}
                                         id="miscellaneous"
                                         name="misc"
