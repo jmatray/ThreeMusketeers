@@ -43,7 +43,10 @@ class BasicInfo extends Component {
         }
         var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
-            return 'success';
+            if (input <= 1000000) {
+                return 'success';
+                }
+                return 'error';
         } else {
             return 'error';
         }
@@ -57,7 +60,10 @@ class BasicInfo extends Component {
         }
         var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
+            if (input <= 1000000) {
             return 'success';
+            }
+            return 'error';
         } else {
             return 'error';
         }
@@ -214,12 +220,13 @@ class BasicInfo extends Component {
                                 <ControlLabel>Estimated Monthly Savings</ControlLabel>
                                 <FormControl
                                     type="number"
+                                    max="1000000"
                                     value={this.state.savingsValue}
                                     placeholder="Enter text"
                                     onChange={this.handleSavingsChange}
                                 />
                                 <FormControl.Feedback />
-                                <HelpBlock>Please enter amount in dollar and cent form</HelpBlock>
+                                <HelpBlock>Please enter an amount less than 1,000,000 in dollar and cent form</HelpBlock>
                             </FormGroup>
 
                             {/* form that takes in the user's student status */}

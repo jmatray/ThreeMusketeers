@@ -29,7 +29,8 @@ class Dashboard extends Component {
                     newUser: false,
                     current: formatExpenses(data),
                     goals: formatGoals(data),
-                    suggested: getSuggestion(data)
+                    suggested: getSuggestion(data),
+                    income: data.basicInfo.income
                 });
             }
         }).then(() => {
@@ -63,6 +64,7 @@ class Dashboard extends Component {
 
     render() {
         console.log(this.state.toDo);
+        console.log(this.state.income)
         //generate rows for the table dynamically
         if (this.state.comparisons !== undefined) {
             var rows = this.state.comparisons.map((row) => {
@@ -147,7 +149,7 @@ class Dashboard extends Component {
                                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
-                                <YAxis />
+                                <YAxis domain={[0, this.state.income]} ticks={[(this.state.income / 4), (this.state.income / 2), ((this.state.income / 4) * 3),this.state.income]}/>
                                 <Tooltip />
                                 <Legend height={8} align='center'/>
                                 <Bar dataKey="current" fill="#ff9900" />

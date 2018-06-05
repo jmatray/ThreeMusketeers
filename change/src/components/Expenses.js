@@ -106,7 +106,10 @@ class Expenses extends Component {
         }
         var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
-            return 'success';
+            if (input <= 1000000) {
+                return 'success';
+                }
+                return 'error';
         } else {
             return 'error';
         }
@@ -119,7 +122,10 @@ class Expenses extends Component {
         }
         var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
-            return 'success';
+            if (input <= 1000000) {
+                return 'success';
+                }
+                return 'error';
         } else {
             return 'error';
         }
@@ -132,7 +138,10 @@ class Expenses extends Component {
         }
         var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
-            return 'success';
+            if (input <= 1000000) {
+                return 'success';
+                }
+                return 'error';
         } else {
             return 'error';
         }
@@ -145,7 +154,26 @@ class Expenses extends Component {
         }
         var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
-            return 'success';
+            if (input <= 1000000) {
+                return 'success';
+                }
+                return 'error';
+        } else {
+            return 'error';
+        }
+    }
+
+    getValidationStateForMisc() {
+        var input = this.state.misc;
+        if (this.state.misc.length === 0) {
+            return null;
+        }
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
+        if (regex.test(input)) {
+            if (input <= 1000000) {
+                return 'success';
+                }
+                return 'error';
         } else {
             return 'error';
         }
@@ -255,6 +283,7 @@ class Expenses extends Component {
                         <form className="format-form" onSubmit={this.handleSubmit}>
                             {/* ... */}
                             <h4>Expenses</h4>
+                            <p>All expenses must be under $1,000,000 and in dollar and cent form.</p>
                             <div className="expense-input">
                             <label for="housing">
                                         Housing
@@ -358,7 +387,8 @@ class Expenses extends Component {
                             this.getValidationStateForHousing() !== "success" ||
                             this.getValidationStateForUtilities() !== "success" ||
                             this.getValidationStateForFood() !== "success" ||
-                            this.getValidationStateForTransportation() !== "success"}
+                            this.getValidationStateForTransportation() !== "success" ||
+                            this.getValidationStateForMisc() === "error"}
                             className="button"
                             onClick={this.formatForSubmit}>Save</Button>
                     </Col>
