@@ -74,11 +74,14 @@ class BasicInfo extends Component {
         if (this.state.numDependents.length === 0) {
             return null;
         }
-        var numNum = +input;
-        if (isNaN(numNum)) {
-            return 'error';
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
+        if (regex.test(input)) {
+            if (input <= 1000000) {
+                return 'success';
+                }
+                return 'error';
         } else {
-            return 'success';
+            return 'error';
         }
     }
 
@@ -87,11 +90,14 @@ class BasicInfo extends Component {
         if (this.state.numInHouse.length === 0) {
             return null;
         }
-        var numNum = +input;
-        if (isNaN(numNum)) {
-            return 'error';
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
+        if (regex.test(input)) {
+            if (input <= 1000000) {
+                return 'success';
+                }
+                return 'error';
         } else {
-            return 'success';
+            return 'error';
         }
     }
 
@@ -266,7 +272,7 @@ class BasicInfo extends Component {
                             >
                                 <ControlLabel>Number of Dependents You Have</ControlLabel>
                                 <FormControl
-                                    type="text"
+                                    type="number"
                                     value={this.state.numDependents}
                                     placeholder="Enter text"
                                     onChange={this.handleDependentChange}
@@ -282,7 +288,7 @@ class BasicInfo extends Component {
                             >
                                 <ControlLabel>Number of Members in Your Household</ControlLabel>
                                 <FormControl
-                                    type="text"
+                                    type="number"
                                     value={this.state.numInHouse}
                                     placeholder="Enter text"
                                     onChange={this.handleHouseChange}

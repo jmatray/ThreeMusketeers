@@ -28,7 +28,7 @@ class Goals extends Component {
         if (this.state.savingsGoal.length === 0) {
             return null;
         }
-        var regex = /[0-9]+/g; // change this
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
             return 'success';
         } else {
@@ -45,7 +45,7 @@ class Goals extends Component {
         if (this.state.necessityGoal.length === 0) {
             return null;
         }
-        var regex = /[0-9]+/g; // change this
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
             return 'success';
         } else {
@@ -62,7 +62,7 @@ class Goals extends Component {
         if (this.state.discretionaryGoal.length === 0) {
             return null;
         }
-        var regex = /[0-9]+/g; // change this
+        var regex = /^\$?\d+(,\d{3})*(\.\d*)?$/;
         if (regex.test(input)) {
             return 'success';
         } else {
@@ -77,13 +77,13 @@ class Goals extends Component {
     handleError() {
         var submitable = true;
         var total = Number(this.state.savingsGoal) + Number(this.state.discretionaryGoal) + Number(this.state.necessityGoal);
-        if (this.state.savingsGoal >= 40) {
-            window.alert("Suggested percentage of savings is 15-20%. You are attempting to save at least double that, that may be too ambitious")
-        } else if (this.state.discretionaryGoal >= 50) {
-            window.alert("Discretionary spending is typically 30% of one’s budget")
-        } else if (total != 100) {
+        if (total != 100) {
             window.alert("Adjust your goals to add up to exactly 100%. your total now is " + total)
             submitable = false;
+        } else if (this.state.discretionaryGoal >= 50) {
+            window.alert("Discretionary spending is typically 30% of one’s budget")
+        } else if (this.state.savingsGoal >= 40) {
+            window.alert("Suggested percentage of savings is 15-20%. You are attempting to save at least double that, that may be too ambitious");
         }
         return submitable;
     }
