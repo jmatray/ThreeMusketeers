@@ -115,22 +115,26 @@ class BasicInfo extends Component {
 
     // Handles changing input value for the estimated income form
     handleIncomeChange(e) {
-        this.setState({ incomeValue: e.target.value });
+        var num = Math.round(e.target.value * 100) / 100;
+        this.setState({ incomeValue: num });
     }
 
     // Handles changing input value for the estimated savings form
     handleSavingsChange(e) {
-        this.setState({ savingsValue: e.target.value });
+        var num = Math.round(e.target.value * 100) / 100;
+        this.setState({ savingsValue: num });
     }
 
     // Handles changing input value for the number of dependents form
     handleDependentChange(e) {
-        this.setState({ numDependents: e.target.value });
+        var num = Math.round(e.target.value);
+        this.setState({ numDependents: num });
     }
 
     // Handles changing input value for the number of household members form
     handleHouseChange(e) {
-        this.setState({ numInHouse: e.target.value });
+        var num = Math.round(e.target.value);
+        this.setState({ numInHouse: num });
     }
 
     handleClear() {

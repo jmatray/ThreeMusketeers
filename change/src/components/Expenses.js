@@ -95,7 +95,8 @@ class Expenses extends Component {
         let field = event.target.name;
         let change = {};
         var number = Number(val);
-        change[field] = number;
+        var num = Math.round(number * 100) / 100;
+        change[field] = num;
         this.setState(change);
     }
 
